@@ -1,0 +1,66 @@
+# Core dependencies for Workflow 1: Code to Design
+pydantic>=2.0.0
+asyncio
+pathlib
+typing-extensions>=4.0.0
+
+# File and text processing
+aiofiles>=23.0.0
+python-magic>=0.4.27
+chardet>=5.0.0
+
+# Code analysis and parsing
+ast-tools>=0.1.0
+tree-sitter>=0.20.0
+tree-sitter-python>=0.20.0
+tree-sitter-javascript>=0.20.0
+tree-sitter-java>=0.20.0
+tree-sitter-go>=0.20.0
+
+# Language detection and analysis
+pygments>=2.15.0
+linguist>=0.1.0
+
+# Data processing and analysis
+pandas>=2.0.0
+numpy>=1.24.0
+networkx>=3.0
+
+# Configuration and environment
+pyyaml>=6.0
+python-dotenv>=1.0.0
+click>=8.0.0
+
+# Logging and monitoring
+structlog>=23.0.0
+rich>=13.0.0
+
+# Testing (development)
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0
+pytest-mock>=3.10.0
+
+# Documentation generation
+jinja2>=3.1.0
+markdown>=3.4.0
+weasyprint>=59.0
+
+# API and web (if needed)
+fastapi>=0.100.0
+uvicorn>=0.22.0
+httpx>=0.24.0
+
+# Database (if needed)
+sqlalchemy>=2.0.0
+alembic>=1.11.0
+
+# Caching (if needed)
+redis>=4.5.0
+
+# Development tools
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.4.0
+pre-commit>=3.0.0

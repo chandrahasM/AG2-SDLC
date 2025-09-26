@@ -1,0 +1,187 @@
+# AG2 Workflow 1: Code to Design Configuration
+
+workflow:
+  name: "code-to-design"
+  version: "1.0.0"
+  description: "Reverse-engineer design documentation from codebase"
+
+orchestrator:
+  max_parallel_agents: 4
+  agent_timeout: 3600  # seconds
+  retry_delay: 5  # seconds
+  log_level: "INFO"
+  output_directory: "./data/outputs"
+  intermediate_outputs: true
+  cleanup_on_completion: false
+
+agents:
+  repository_analyzer:
+    name: "repository_analyzer"
+    version: "1.0.0"
+    enabled: true
+    max_execution_time: 1800  # seconds
+    retry_count: 3
+    timeout: 300  # seconds
+    parameters:
+      max_file_size_mb: 10
+      include_comments: true
+      include_docstrings: true
+      analyze_test_files: true
+      generate_metrics: true
+      language_specific: true
+      file_patterns:
+        - "*.py"
+        - "*.java"
+        - "*.js"
+        - "*.ts"
+        - "*.md"
+        - "*.json"
+        - "*.yaml"
+        - "*.yml"
+      exclude_patterns:
+        - "**/node_modules/**"
+        - "**/__pycache__/**"
+        - "**/.git/**"
+        - "**/venv/**"
+        - "**/env/**"
+
+  documentation_synthesizer:
+    name: "documentation_synthesizer"
+    version: "1.0.0"
+    enabled: true
+    max_execution_time: 1200  # seconds
+    retry_count: 3
+    timeout: 300  # seconds
+    parameters:
+      include_markdown: true
+      include_confluence: false
+      include_notion: false
+      similarity_threshold: 0.7
+      gap_analysis_depth: 3
+
+  design_architect:
+    name: "design_architect"
+    version: "1.0.0"
+    enabled: true
+    max_execution_time: 2400  # seconds
+    retry_count: 3
+    timeout: 300  # seconds
+    parameters:
+      include_diagrams: true
+      diagram_format: "text"
+      output_format: "markdown"
+      detail_level: "comprehensive"
+
+  test_analyst:
+    name: "test_analyst"
+    version: "1.0.0"
+    enabled: true
+    max_execution_time: 900  # seconds
+    retry_count: 3
+    timeout: 300  # seconds
+    parameters:
+      analyze_coverage: true
+      generate_scenarios: true
+      include_performance_tests: true
+      test_framework_detection: true
+
+  devops_designer:
+    name: "devops_designer"
+    version: "1.0.0"
+    enabled: true
+    max_execution_time: 1200  # seconds
+    retry_count: 3
+    timeout: 300  # seconds
+    parameters:
+      analyze_logs: true
+      detect_infrastructure: true
+      generate_monitoring: true
+      include_security: true
+
+  qa_validator:
+    name: "qa_validator"
+    version: "1.0.0"
+    enabled: true
+    max_execution_time: 600  # seconds
+    retry_count: 3
+    timeout: 300  # seconds
+    parameters:
+      generate_questions: true
+      validate_consistency: true
+      assess_confidence: true
+      prioritize_issues: true
+      question_count_limit: 20
+
+# LLM Configuration
+llm:
+  model: "gpt-4"
+  temperature: 0.1
+  max_tokens: 4000
+  timeout: 60  # seconds
+
+# File Processing
+file_processing:
+  max_file_size_mb: 10
+  supported_languages:
+    - "python"
+    - "javascript"
+    - "typescript"
+    - "java"
+    - "go"
+    - "rust"
+    - "csharp"
+    - "php"
+    - "ruby"
+    - "cpp"
+    - "c"
+    - "html"
+    - "css"
+    - "json"
+    - "yaml"
+    - "xml"
+    - "markdown"
+
+# Output Configuration
+output:
+  formats:
+    - "markdown"
+    - "json"
+    - "html"
+  include_diagrams: true
+  diagram_formats:
+    - "text"
+    - "mermaid"
+    - "plantuml"
+
+# Validation
+validation:
+  enabled: true
+  confidence_threshold: 0.7
+  auto_retry_failed_agents: true
+
+# Performance
+performance:
+  enable_caching: true
+  cache_ttl_hours: 24
+  max_memory_usage_mb: 2048
+
+# Environment
+environment:
+  name: "development"
+  debug_mode: false
+  log_file: null
+  database_url: null
+  redis_url: null
+
+# AG2 Integration
+ag2:
+  api_url: null
+  api_key: null
+  workspace_id: null
+
+# External Services
+external_services:
+  github_token: null
+  gitlab_token: null
+  confluence_url: null
+  confluence_token: null

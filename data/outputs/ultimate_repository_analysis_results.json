@@ -1,0 +1,3525 @@
+{
+  "structural_analysis": {
+    "repo_metadata": {
+      "name": "",
+      "total_files": 5,
+      "total_functions": 74,
+      "total_classes": 96,
+      "languages": [
+        "Python"
+      ],
+      "analysis_timestamp": "2025-09-25T20:07:20.058421"
+    },
+    "architecture_analysis": {
+      "pattern": "Layered Architecture",
+      "confidence": 0.75,
+      "components": [
+        "UserService",
+        "BookingService",
+        "PaymentService",
+        "NotificationService"
+      ],
+      "entry_points": [
+        "User Registration",
+        "Booking Management",
+        "Payment Processing"
+      ],
+      "design_principles": [
+        "Single Responsibility Principle",
+        "Separation of Concerns",
+        "Encapsulation"
+      ],
+      "architectural_concerns": [
+        "Scalability",
+        "Maintainability",
+        "Security"
+      ]
+    },
+    "code_quality_metrics": {
+      "total_functions": 74,
+      "total_classes": 96,
+      "average_complexity": 0.43243243243243246,
+      "max_complexity": 4,
+      "documentation_coverage": 0.0,
+      "maintainability_index": 47.83783783783784,
+      "technical_debt_score": 52.16216216216216,
+      "code_duplication": 0.0
+    },
+    "detected_patterns": [
+      {
+        "name": "Service Layer",
+        "type": "Structural",
+        "confidence": 0.8,
+        "location": "BookingService, UserService, PaymentService",
+        "description": "Encapsulates business logic and coordinates data flow between the presentation layer and data access layer.",
+        "implementation_quality": 0.75
+      }
+    ]
+  },
+  "semantic_analysis": {
+    "business_capabilities": [
+      {
+        "capability": "User Registration and Management",
+        "purpose": "Handle user lifecycle from registration to deletion",
+        "implementing_components": [
+          ""
+        ],
+        "business_rules": [],
+        "workflows": []
+      },
+      {
+        "capability": "Booking and Reservation Management",
+        "purpose": "Manage reservations and availability",
+        "implementing_components": [
+          "",
+          "BookingStatus",
+          "BookingBase",
+          "BookingCreate",
+          "BookingUpdate",
+          "BookingResponse",
+          "Booking",
+          "BookingService"
+        ],
+        "business_rules": [
+          {
+            "rule": "Input validation rule for booking_dates",
+            "implementation": "validate_booking_dates()",
+            "complexity": "Low",
+            "dependencies": []
+          },
+          {
+            "rule": "Business rule enforced by check_room_availability",
+            "implementation": "check_room_availability()",
+            "complexity": "Low",
+            "dependencies": []
+          }
+        ],
+        "workflows": []
+      },
+      {
+        "capability": "Payment Processing",
+        "purpose": "Process payments and manage financial transactions",
+        "implementing_components": [
+          "",
+          "PaymentStatus",
+          "PaymentMethod",
+          "PaymentBase",
+          "PaymentCreate",
+          "PaymentResponse",
+          "Payment",
+          "PaymentService"
+        ],
+        "business_rules": [],
+        "workflows": [
+          {
+            "name": "Process Payment",
+            "steps": [
+              "Process request",
+              "Return response"
+            ],
+            "data_flow": "Input \u2192 Processing \u2192 Output",
+            "exception_handling": "Standard error handling"
+          }
+        ]
+      },
+      {
+        "capability": "Notification System",
+        "purpose": "Send notifications and alerts to users",
+        "implementing_components": [
+          ""
+        ],
+        "business_rules": [],
+        "workflows": []
+      },
+      {
+        "capability": "Security and Authentication",
+        "purpose": "Manage authentication and authorization",
+        "implementing_components": [
+          "UserRole"
+        ],
+        "business_rules": [],
+        "workflows": []
+      },
+      {
+        "capability": "Analytics and Reporting",
+        "purpose": "Collect and analyze system metrics",
+        "implementing_components": [
+          "AuditLog",
+          "AuditLogResponse"
+        ],
+        "business_rules": [],
+        "workflows": []
+      }
+    ],
+    "domain_models": {
+      "entities": [],
+      "aggregates": []
+    },
+    "service_boundaries": [
+      {
+        "service": "UserService",
+        "responsibility": "Handle all user-related operations",
+        "public_interface": [],
+        "internal_implementation": [],
+        "data_ownership": "Owns User, UserProfile, UserPreferences entities"
+      },
+      {
+        "service": "HotelService",
+        "responsibility": "Manage hotel information and operations",
+        "public_interface": [],
+        "internal_implementation": [],
+        "data_ownership": "Owns Hotel, Room entities"
+      },
+      {
+        "service": "RoomService",
+        "responsibility": "Handle room operations",
+        "public_interface": [],
+        "internal_implementation": [],
+        "data_ownership": "Owns Room related entities"
+      },
+      {
+        "service": "BookingService",
+        "responsibility": "Process booking and reservation requests",
+        "public_interface": [],
+        "internal_implementation": [],
+        "data_ownership": "Owns Booking, Reservation entities"
+      },
+      {
+        "service": "PaymentService",
+        "responsibility": "Handle payment operations",
+        "public_interface": [],
+        "internal_implementation": [],
+        "data_ownership": "Owns Payment related entities"
+      },
+      {
+        "service": "ReviewService",
+        "responsibility": "Handle review operations",
+        "public_interface": [],
+        "internal_implementation": [],
+        "data_ownership": "Owns Review related entities"
+      },
+      {
+        "service": "NotificationService",
+        "responsibility": "Handle notification operations",
+        "public_interface": [],
+        "internal_implementation": [],
+        "data_ownership": "Owns Notification related entities"
+      }
+    ]
+  },
+  "behavioral_analysis": {
+    "api_contracts": [],
+    "business_processes": [
+      {
+        "process": "crud",
+        "trigger": "Manual trigger",
+        "steps": [
+          {
+            "step": "Accesses db data from storage",
+            "component": "get_db",
+            "business_rules": [],
+            "data_transformations": [
+              "SessionLocal() \u2192 db"
+            ],
+            "dependencies": [
+              {
+                "dependency": "db",
+                "operation": "db.close",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses db session data from storage",
+            "component": "get_db_session",
+            "business_rules": [],
+            "data_transformations": [
+              "SessionLocal() \u2192 db"
+            ],
+            "dependencies": [
+              {
+                "dependency": "db",
+                "operation": "db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.close",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.rollback",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles tables operations",
+            "component": "create_tables",
+            "business_rules": [
+              "Business operation: Base.metadata.create_all"
+            ],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "Base",
+                "operation": "Base.metadata.create_all",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses current user data from storage",
+            "component": "get_current_user",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": []
+          },
+          {
+            "step": "Accesses admin user data from storage",
+            "component": "get_admin_user",
+            "business_rules": [
+              "Business rule: current_user['role'] not in [UserRole.ADMIN, UserRole.MANAGER]"
+            ],
+            "data_transformations": [],
+            "dependencies": []
+          },
+          {
+            "step": "Handles user operations",
+            "component": "create_user",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.post",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "background_tasks",
+                "operation": "background_tasks.add_task",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses current user profile data from storage",
+            "component": "get_current_user_profile",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses current user profile data from storage",
+            "component": "update_current_user_profile",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.put",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles hotel operations",
+            "component": "create_hotel",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.post",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotels data from storage",
+            "component": "get_hotels",
+            "business_rules": [],
+            "data_transformations": [
+              "[] \u2192 hotels"
+            ],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotel data from storage",
+            "component": "get_hotel",
+            "business_rules": [
+              "Business rule: hotel_id <= 0"
+            ],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotel data from storage",
+            "component": "update_hotel",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.put",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles room operations",
+            "component": "create_room",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.post",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotel rooms data from storage",
+            "component": "get_hotel_rooms",
+            "business_rules": [],
+            "data_transformations": [
+              "[] \u2192 rooms"
+            ],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses room data from storage",
+            "component": "get_room",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles booking operations",
+            "component": "create_booking",
+            "business_rules": [
+              "Business rule: background_tasks"
+            ],
+            "data_transformations": [
+              "150.0 * (booking.check_out_date - booking.check_in_date).days \u2192 total_amount",
+              "BookingResponse(id=1, user_id=current_user['id'], room_id=booking.room_id, check_in_date=booking.check_in_date, check_out_date=booking.check_out_date, adults=booking.adults, children=booking.children, special_requests=booking.special_requests, status=BookingStatus.PENDING, total_amount=total_amount, created_at=datetime.now(), updated_at=datetime.now()) \u2192 booking_response"
+            ],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.post",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "background_tasks",
+                "operation": "background_tasks.add_task",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses user bookings data from storage",
+            "component": "get_user_bookings",
+            "business_rules": [],
+            "data_transformations": [
+              "[] \u2192 bookings"
+            ],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses booking data from storage",
+            "component": "get_booking",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "date",
+                "operation": "date.today",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "date",
+                "operation": "date.today",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses booking data from storage",
+            "component": "update_booking",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.put",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "date",
+                "operation": "date.today",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "date",
+                "operation": "date.today",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles payment operations",
+            "component": "create_payment",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.post",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses user payments data from storage",
+            "component": "get_user_payments",
+            "business_rules": [],
+            "data_transformations": [
+              "[] \u2192 payments"
+            ],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles user operations",
+            "component": "create_user",
+            "business_rules": [],
+            "data_transformations": [
+              "User(email=user_data['email'], first_name=user_data['first_name'], last_name=user_data['last_name'], phone=user_data.get('phone'), date_of_birth=user_data.get('date_of_birth'), role=user_data.get('role', UserRole.CUSTOMER)) \u2192 user"
+            ],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.refresh",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "user_data",
+                "operation": "user_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "user_data",
+                "operation": "user_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "user_data",
+                "operation": "user_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "user_data",
+                "operation": "user_data.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses user by id data from storage",
+            "component": "get_user_by_id",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(User).filter(User.id == user_id).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(User).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses user by email data from storage",
+            "component": "get_user_by_email",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(User).filter(User.email == email).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(User).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses user data from storage",
+            "component": "update_user",
+            "business_rules": [
+              "Business rule: not user",
+              "Business operation: update_data.items",
+              "Business rule: hasattr(user, key) and value is not None"
+            ],
+            "data_transformations": [
+              "self.get_user_by_id(user_id) \u2192 user",
+              "datetime.utcnow() \u2192 user.updated_at"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.get_user_by_id",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "update_data",
+                "operation": "update_data.items",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.utcnow",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.refresh",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles hotel operations",
+            "component": "create_hotel",
+            "business_rules": [],
+            "data_transformations": [
+              "Hotel(name=hotel_data['name'], description=hotel_data.get('description'), address=hotel_data['address'], city=hotel_data['city'], country=hotel_data['country'], star_rating=hotel_data['star_rating'], amenities=hotel_data.get('amenities', []), latitude=hotel_data.get('latitude'), longitude=hotel_data.get('longitude')) \u2192 hotel"
+            ],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.refresh",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "hotel_data",
+                "operation": "hotel_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "hotel_data",
+                "operation": "hotel_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "hotel_data",
+                "operation": "hotel_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "hotel_data",
+                "operation": "hotel_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "hotel_data",
+                "operation": "hotel_data.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotel by id data from storage",
+            "component": "get_hotel_by_id",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Hotel).filter(Hotel.id == hotel_id).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Hotel).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotels by city data from storage",
+            "component": "get_hotels_by_city",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Hotel).filter(and_(Hotel.city.ilike(f'%{city}%'), Hotel.is_active == True)).all",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Hotel).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "Hotel",
+                "operation": "Hotel.city.ilike",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotel data from storage",
+            "component": "update_hotel",
+            "business_rules": [
+              "Business rule: not hotel",
+              "Business operation: update_data.items",
+              "Business rule: hasattr(hotel, key) and value is not None"
+            ],
+            "data_transformations": [
+              "self.get_hotel_by_id(hotel_id) \u2192 hotel",
+              "datetime.utcnow() \u2192 hotel.updated_at"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.get_hotel_by_id",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "update_data",
+                "operation": "update_data.items",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.utcnow",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.refresh",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles room operations",
+            "component": "create_room",
+            "business_rules": [],
+            "data_transformations": [
+              "Room(hotel_id=room_data['hotel_id'], room_number=room_data['room_number'], room_type=room_data['room_type'], price_per_night=room_data['price_per_night'], max_occupancy=room_data['max_occupancy'], size_sqm=room_data.get('size_sqm'), amenities=room_data.get('amenities', []), description=room_data.get('description')) \u2192 room"
+            ],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.refresh",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "room_data",
+                "operation": "room_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "room_data",
+                "operation": "room_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "room_data",
+                "operation": "room_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "room_data",
+                "operation": "room_data.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses room by id data from storage",
+            "component": "get_room_by_id",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Room).filter(Room.id == room_id).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Room).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses rooms by hotel data from storage",
+            "component": "get_rooms_by_hotel",
+            "business_rules": [
+              "Business rule: available_only"
+            ],
+            "data_transformations": [
+              "self.db.query(Room).filter(Room.hotel_id == hotel_id) \u2192 query",
+              "query.filter(Room.is_available == True) \u2192 query"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Room).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.all",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses available rooms data from storage",
+            "component": "get_available_rooms",
+            "business_rules": [
+              "Business rule: room_type",
+              "Business rule: self.check_room_availability(room.id, check_in, check_out)"
+            ],
+            "data_transformations": [
+              "self.db.query(Room).filter(and_(Room.hotel_id == hotel_id, Room.is_available == True)) \u2192 query",
+              "[] \u2192 available_rooms",
+              "query.filter(Room.room_type == room_type) \u2192 query"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Room).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.all",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.check_room_availability",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "available_rooms",
+                "operation": "available_rooms.append",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles booking operations",
+            "component": "create_booking",
+            "business_rules": [
+              "Business rule: not self.room_service.check_room_availability(booking_data['room_id'], booking_data['check_in_date'], booking_data['check_out_date'])"
+            ],
+            "data_transformations": [
+              "self.room_service.get_room_by_id(booking_data['room_id']) \u2192 room",
+              "(booking_data['check_out_date'] - booking_data['check_in_date']).days \u2192 nights",
+              "room.price_per_night * nights \u2192 total_amount",
+              "Booking(user_id=booking_data['user_id'], room_id=booking_data['room_id'], check_in_date=booking_data['check_in_date'], check_out_date=booking_data['check_out_date'], adults=booking_data['adults'], children=booking_data.get('children', 0), special_requests=booking_data.get('special_requests'), total_amount=total_amount) \u2192 booking"
+            ],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.room_service.get_room_by_id",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.refresh",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.room_service.check_room_availability",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "booking_data",
+                "operation": "booking_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "booking_data",
+                "operation": "booking_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "booking_data",
+                "operation": "booking_data.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses booking by id data from storage",
+            "component": "get_booking_by_id",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Booking).filter(Booking.id == booking_id).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Booking).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses user bookings data from storage",
+            "component": "get_user_bookings",
+            "business_rules": [
+              "Business rule: status",
+              "Business operation: query.order_by(Booking.created_at.desc()).all",
+              "Business operation: Booking.created_at.desc"
+            ],
+            "data_transformations": [
+              "self.db.query(Booking).filter(Booking.user_id == user_id) \u2192 query",
+              "query.filter(Booking.status == status) \u2192 query"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Booking).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.order_by(Booking.created_at.desc()).all",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.order_by",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "Booking",
+                "operation": "Booking.created_at.desc",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses booking status data from storage",
+            "component": "update_booking_status",
+            "business_rules": [
+              "Business rule: not booking"
+            ],
+            "data_transformations": [
+              "self.get_booking_by_id(booking_id) \u2192 booking",
+              "status \u2192 booking.status",
+              "datetime.utcnow() \u2192 booking.updated_at"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.get_booking_by_id",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.utcnow",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses booking revenue data from storage",
+            "component": "get_booking_revenue",
+            "business_rules": [],
+            "data_transformations": [
+              "self.db.query(func.sum(Booking.total_amount)).filter(and_(Booking.status == BookingStatus.CONFIRMED, Booking.check_in_date >= start_date, Booking.check_in_date <= end_date)).scalar() \u2192 result"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(func.sum(Booking.total_amount)).filter(and_(Booking.status == BookingStatus.CONFIRMED, Booking.check_in_date >= start_date, Booking.check_in_date <= end_date)).scalar",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(func.sum(Booking.total_amount)).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "func",
+                "operation": "func.sum",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles payment operations",
+            "component": "create_payment",
+            "business_rules": [],
+            "data_transformations": [
+              "Payment(booking_id=payment_data['booking_id'], user_id=payment_data['user_id'], amount=payment_data['amount'], payment_method=payment_data['payment_method'], transaction_id=payment_data.get('transaction_id')) \u2192 payment"
+            ],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.refresh",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "payment_data",
+                "operation": "payment_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "payment_data",
+                "operation": "payment_data.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses payment by id data from storage",
+            "component": "get_payment_by_id",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Payment).filter(Payment.id == payment_id).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Payment).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses user payments data from storage",
+            "component": "get_user_payments",
+            "business_rules": [
+              "Business operation: self.db.query(Payment).filter(Payment.user_id == user_id).order_by(Payment.created_at.desc()).all",
+              "Business operation: Payment.created_at.desc"
+            ],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Payment).filter(Payment.user_id == user_id).order_by(Payment.created_at.desc()).all",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Payment).filter(Payment.user_id == user_id).order_by",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "Payment",
+                "operation": "Payment.created_at.desc",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Payment).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles review operations",
+            "component": "create_review",
+            "business_rules": [],
+            "data_transformations": [
+              "Review(user_id=review_data['user_id'], hotel_id=review_data['hotel_id'], booking_id=review_data.get('booking_id'), rating=review_data['rating'], title=review_data.get('title'), comment=review_data.get('comment')) \u2192 review"
+            ],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.refresh",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "review_data",
+                "operation": "review_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "review_data",
+                "operation": "review_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "review_data",
+                "operation": "review_data.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "review_data",
+                "operation": "review_data.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotel reviews data from storage",
+            "component": "get_hotel_reviews",
+            "business_rules": [
+              "Business operation: self.db.query(Review).filter(Review.hotel_id == hotel_id).order_by(Review.created_at.desc()).all",
+              "Business operation: Review.created_at.desc"
+            ],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Review).filter(Review.hotel_id == hotel_id).order_by(Review.created_at.desc()).all",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Review).filter(Review.hotel_id == hotel_id).order_by",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "Review",
+                "operation": "Review.created_at.desc",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Review).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses hotel average rating data from storage",
+            "component": "get_hotel_average_rating",
+            "business_rules": [],
+            "data_transformations": [
+              "self.db.query(func.avg(Review.rating)).filter(Review.hotel_id == hotel_id).scalar() \u2192 result"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(func.avg(Review.rating)).filter(Review.hotel_id == hotel_id).scalar",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(func.avg(Review.rating)).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "func",
+                "operation": "func.avg",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Accesses user notifications data from storage",
+            "component": "get_user_notifications",
+            "business_rules": [
+              "Business rule: unread_only",
+              "Business operation: query.order_by(Notification.created_at.desc()).all",
+              "Business operation: Notification.created_at.desc"
+            ],
+            "data_transformations": [
+              "self.db.query(Notification).filter(Notification.user_id == user_id) \u2192 query",
+              "query.filter(Notification.is_read == False) \u2192 query"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Notification).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.order_by(Notification.created_at.desc()).all",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.order_by",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "Notification",
+                "operation": "Notification.created_at.desc",
+                "dependency_type": "external_service"
+              }
+            ]
+          }
+        ],
+        "outcomes": [
+          "Data modification: Base.metadata.create_all",
+          "Error: Exception",
+          "Data modification: update_data.items",
+          "Data modification: self.db.query(Review).filter(Review.hotel_id == hotel_id).order_by(Review.created_at.desc()).all",
+          "Data modification: query.order_by(Notification.created_at.desc()).all",
+          "External communication: self.db.query(User).filter(User.email == email).first",
+          "Logging/tracking: logger.info",
+          "Data modification: Payment.created_at.desc",
+          "Data modification: Notification.created_at.desc",
+          "Data modification: query.order_by(Booking.created_at.desc()).all",
+          "Data modification: self.db.query(Payment).filter(Payment.user_id == user_id).order_by(Payment.created_at.desc()).all",
+          "Data modification: Review.created_at.desc",
+          "Data modification: Booking.created_at.desc"
+        ],
+        "data_transformations": [
+          "SessionLocal() \u2192 db",
+          "SessionLocal() \u2192 db",
+          "[] \u2192 hotels",
+          "[] \u2192 rooms",
+          "150.0 * (booking.check_out_date - booking.check_in_date).days \u2192 total_amount",
+          "BookingResponse(id=1, user_id=current_user['id'], room_id=booking.room_id, check_in_date=booking.check_in_date, check_out_date=booking.check_out_date, adults=booking.adults, children=booking.children, special_requests=booking.special_requests, status=BookingStatus.PENDING, total_amount=total_amount, created_at=datetime.now(), updated_at=datetime.now()) \u2192 booking_response",
+          "[] \u2192 bookings",
+          "[] \u2192 payments",
+          "User(email=user_data['email'], first_name=user_data['first_name'], last_name=user_data['last_name'], phone=user_data.get('phone'), date_of_birth=user_data.get('date_of_birth'), role=user_data.get('role', UserRole.CUSTOMER)) \u2192 user",
+          "self.get_user_by_id(user_id) \u2192 user",
+          "datetime.utcnow() \u2192 user.updated_at",
+          "Hotel(name=hotel_data['name'], description=hotel_data.get('description'), address=hotel_data['address'], city=hotel_data['city'], country=hotel_data['country'], star_rating=hotel_data['star_rating'], amenities=hotel_data.get('amenities', []), latitude=hotel_data.get('latitude'), longitude=hotel_data.get('longitude')) \u2192 hotel",
+          "self.get_hotel_by_id(hotel_id) \u2192 hotel",
+          "datetime.utcnow() \u2192 hotel.updated_at",
+          "Room(hotel_id=room_data['hotel_id'], room_number=room_data['room_number'], room_type=room_data['room_type'], price_per_night=room_data['price_per_night'], max_occupancy=room_data['max_occupancy'], size_sqm=room_data.get('size_sqm'), amenities=room_data.get('amenities', []), description=room_data.get('description')) \u2192 room",
+          "self.db.query(Room).filter(Room.hotel_id == hotel_id) \u2192 query",
+          "query.filter(Room.is_available == True) \u2192 query",
+          "self.db.query(Room).filter(and_(Room.hotel_id == hotel_id, Room.is_available == True)) \u2192 query",
+          "[] \u2192 available_rooms",
+          "query.filter(Room.room_type == room_type) \u2192 query",
+          "self.room_service.get_room_by_id(booking_data['room_id']) \u2192 room",
+          "(booking_data['check_out_date'] - booking_data['check_in_date']).days \u2192 nights",
+          "room.price_per_night * nights \u2192 total_amount",
+          "Booking(user_id=booking_data['user_id'], room_id=booking_data['room_id'], check_in_date=booking_data['check_in_date'], check_out_date=booking_data['check_out_date'], adults=booking_data['adults'], children=booking_data.get('children', 0), special_requests=booking_data.get('special_requests'), total_amount=total_amount) \u2192 booking",
+          "self.db.query(Booking).filter(Booking.user_id == user_id) \u2192 query",
+          "query.filter(Booking.status == status) \u2192 query",
+          "self.get_booking_by_id(booking_id) \u2192 booking",
+          "status \u2192 booking.status",
+          "datetime.utcnow() \u2192 booking.updated_at",
+          "self.db.query(func.sum(Booking.total_amount)).filter(and_(Booking.status == BookingStatus.CONFIRMED, Booking.check_in_date >= start_date, Booking.check_in_date <= end_date)).scalar() \u2192 result",
+          "Payment(booking_id=payment_data['booking_id'], user_id=payment_data['user_id'], amount=payment_data['amount'], payment_method=payment_data['payment_method'], transaction_id=payment_data.get('transaction_id')) \u2192 payment",
+          "Review(user_id=review_data['user_id'], hotel_id=review_data['hotel_id'], booking_id=review_data.get('booking_id'), rating=review_data['rating'], title=review_data.get('title'), comment=review_data.get('comment')) \u2192 review",
+          "self.db.query(func.avg(Review.rating)).filter(Review.hotel_id == hotel_id).scalar() \u2192 result",
+          "self.db.query(Notification).filter(Notification.user_id == user_id) \u2192 query",
+          "query.filter(Notification.is_read == False) \u2192 query"
+        ],
+        "error_scenarios": [
+          "Exception"
+        ],
+        "performance_characteristics": {
+          "async_operations": 18,
+          "database_calls": 0,
+          "external_calls": 0,
+          "complexity_score": 14
+        },
+        "dependencies": [
+          "hotel_data",
+          "Review",
+          "Payment",
+          "func",
+          "Booking",
+          "Notification",
+          "available_rooms",
+          "room_data",
+          "user_data",
+          "Base",
+          "booking_data",
+          "app",
+          "logger",
+          "payment_data",
+          "Hotel",
+          "update_data",
+          "review_data",
+          "query",
+          "datetime",
+          "date",
+          "db",
+          "background_tasks",
+          "self"
+        ]
+      },
+      {
+        "process": "general",
+        "trigger": "Manual trigger",
+        "steps": [
+          {
+            "step": "Handles drop tables operations",
+            "component": "drop_tables",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "Base",
+                "operation": "Base.metadata.drop_all",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles init db operations",
+            "component": "init_db",
+            "business_rules": [
+              "Business operation: create_tables",
+              "Business rule: db.query(User).first()"
+            ],
+            "data_transformations": [
+              "SessionLocal() \u2192 db",
+              "User(email='admin@booking.com', first_name='Admin', last_name='User', role=UserRole.ADMIN, is_active=True) \u2192 admin_user",
+              "User(email='customer@example.com', first_name='John', last_name='Doe', role=UserRole.CUSTOMER, is_active=True) \u2192 customer_user",
+              "Hotel(name='Grand Palace Hotel', description='A luxurious 5-star hotel in the heart of the city', address='123 Main Street, Downtown', city='New York', country='USA', star_rating=5, amenities=['WiFi', 'Pool', 'Spa', 'Gym', 'Restaurant', 'Bar'], latitude=40.7128, longitude=-74.006, is_active=True) \u2192 hotel",
+              "[{'room_number': '101', 'room_type': RoomType.SINGLE, 'price_per_night': 150.0, 'max_occupancy': 1, 'size_sqm': 20.0, 'amenities': ['WiFi', 'TV', 'Mini Bar'], 'description': 'Comfortable single room with city view'}, {'room_number': '201', 'room_type': RoomType.DOUBLE, 'price_per_night': 250.0, 'max_occupancy': 2, 'size_sqm': 30.0, 'amenities': ['WiFi', 'TV', 'Mini Bar', 'Balcony'], 'description': 'Spacious double room with balcony'}, {'room_number': '301', 'room_type': RoomType.SUITE, 'price_per_night': 500.0, 'max_occupancy': 4, 'size_sqm': 60.0, 'amenities': ['WiFi', 'TV', 'Mini Bar', 'Balcony', 'Jacuzzi'], 'description': 'Luxurious suite with jacuzzi and city view'}, {'room_number': '401', 'room_type': RoomType.PRESIDENTIAL, 'price_per_night': 1000.0, 'max_occupancy': 6, 'size_sqm': 100.0, 'amenities': ['WiFi', 'TV', 'Mini Bar', 'Balcony', 'Jacuzzi', 'Butler Service'], 'description': 'Presidential suite with butler service'}] \u2192 rooms_data",
+              "Room(hotel_id=hotel.id, **room_data) \u2192 room"
+            ],
+            "dependencies": [
+              {
+                "dependency": "db",
+                "operation": "db.query(User).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.close",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.add",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.rollback",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "db",
+                "operation": "db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles root operations",
+            "component": "root",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles cancel booking operations",
+            "component": "cancel_booking",
+            "business_rules": [
+              "Business operation: app.delete"
+            ],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.delete",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles   init   operations",
+            "component": "__init__",
+            "business_rules": [],
+            "data_transformations": [
+              "db \u2192 self.db"
+            ],
+            "dependencies": []
+          },
+          {
+            "step": "Handles deactivate user operations",
+            "component": "deactivate_user",
+            "business_rules": [
+              "Business rule: not user"
+            ],
+            "data_transformations": [
+              "self.get_user_by_id(user_id) \u2192 user",
+              "False \u2192 user.is_active",
+              "datetime.utcnow() \u2192 user.updated_at"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.get_user_by_id",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.utcnow",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles   init   operations",
+            "component": "__init__",
+            "business_rules": [],
+            "data_transformations": [
+              "db \u2192 self.db"
+            ],
+            "dependencies": []
+          },
+          {
+            "step": "Handles   init   operations",
+            "component": "__init__",
+            "business_rules": [],
+            "data_transformations": [
+              "db \u2192 self.db"
+            ],
+            "dependencies": []
+          },
+          {
+            "step": "Handles   init   operations",
+            "component": "__init__",
+            "business_rules": [],
+            "data_transformations": [
+              "db \u2192 self.db",
+              "RoomService(db) \u2192 self.room_service"
+            ],
+            "dependencies": []
+          },
+          {
+            "step": "Handles cancel booking operations",
+            "component": "cancel_booking",
+            "business_rules": [
+              "Business operation: self.update_booking_status"
+            ],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.update_booking_status",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles   init   operations",
+            "component": "__init__",
+            "business_rules": [],
+            "data_transformations": [
+              "db \u2192 self.db"
+            ],
+            "dependencies": []
+          },
+          {
+            "step": "Handles refund payment operations",
+            "component": "refund_payment",
+            "business_rules": [
+              "Business rule: not payment or payment.status != PaymentStatus.COMPLETED"
+            ],
+            "data_transformations": [
+              "self.get_payment_by_id(payment_id) \u2192 payment",
+              "PaymentStatus.REFUNDED \u2192 payment.status",
+              "datetime.utcnow() \u2192 payment.updated_at"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.get_payment_by_id",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.utcnow",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles   init   operations",
+            "component": "__init__",
+            "business_rules": [],
+            "data_transformations": [
+              "db \u2192 self.db"
+            ],
+            "dependencies": []
+          },
+          {
+            "step": "Handles   init   operations",
+            "component": "__init__",
+            "business_rules": [],
+            "data_transformations": [
+              "db \u2192 self.db"
+            ],
+            "dependencies": []
+          }
+        ],
+        "outcomes": [
+          "Error: Exception",
+          "Data modification: create_tables",
+          "Data modification: self.update_booking_status",
+          "Logging/tracking: logger.info",
+          "Data modification: app.delete"
+        ],
+        "data_transformations": [
+          "SessionLocal() \u2192 db",
+          "User(email='admin@booking.com', first_name='Admin', last_name='User', role=UserRole.ADMIN, is_active=True) \u2192 admin_user",
+          "User(email='customer@example.com', first_name='John', last_name='Doe', role=UserRole.CUSTOMER, is_active=True) \u2192 customer_user",
+          "Hotel(name='Grand Palace Hotel', description='A luxurious 5-star hotel in the heart of the city', address='123 Main Street, Downtown', city='New York', country='USA', star_rating=5, amenities=['WiFi', 'Pool', 'Spa', 'Gym', 'Restaurant', 'Bar'], latitude=40.7128, longitude=-74.006, is_active=True) \u2192 hotel",
+          "[{'room_number': '101', 'room_type': RoomType.SINGLE, 'price_per_night': 150.0, 'max_occupancy': 1, 'size_sqm': 20.0, 'amenities': ['WiFi', 'TV', 'Mini Bar'], 'description': 'Comfortable single room with city view'}, {'room_number': '201', 'room_type': RoomType.DOUBLE, 'price_per_night': 250.0, 'max_occupancy': 2, 'size_sqm': 30.0, 'amenities': ['WiFi', 'TV', 'Mini Bar', 'Balcony'], 'description': 'Spacious double room with balcony'}, {'room_number': '301', 'room_type': RoomType.SUITE, 'price_per_night': 500.0, 'max_occupancy': 4, 'size_sqm': 60.0, 'amenities': ['WiFi', 'TV', 'Mini Bar', 'Balcony', 'Jacuzzi'], 'description': 'Luxurious suite with jacuzzi and city view'}, {'room_number': '401', 'room_type': RoomType.PRESIDENTIAL, 'price_per_night': 1000.0, 'max_occupancy': 6, 'size_sqm': 100.0, 'amenities': ['WiFi', 'TV', 'Mini Bar', 'Balcony', 'Jacuzzi', 'Butler Service'], 'description': 'Presidential suite with butler service'}] \u2192 rooms_data",
+          "Room(hotel_id=hotel.id, **room_data) \u2192 room",
+          "db \u2192 self.db",
+          "self.get_user_by_id(user_id) \u2192 user",
+          "False \u2192 user.is_active",
+          "datetime.utcnow() \u2192 user.updated_at",
+          "db \u2192 self.db",
+          "db \u2192 self.db",
+          "db \u2192 self.db",
+          "RoomService(db) \u2192 self.room_service",
+          "db \u2192 self.db",
+          "self.get_payment_by_id(payment_id) \u2192 payment",
+          "PaymentStatus.REFUNDED \u2192 payment.status",
+          "datetime.utcnow() \u2192 payment.updated_at",
+          "db \u2192 self.db",
+          "db \u2192 self.db"
+        ],
+        "error_scenarios": [
+          "Exception"
+        ],
+        "performance_characteristics": {
+          "async_operations": 2,
+          "database_calls": 0,
+          "external_calls": 0,
+          "complexity_score": 3
+        },
+        "dependencies": [
+          "app",
+          "logger",
+          "datetime",
+          "db",
+          "Base",
+          "self"
+        ]
+      },
+      {
+        "process": "validation",
+        "trigger": "Manual trigger",
+        "steps": [
+          {
+            "step": "Handles health check operations",
+            "component": "health_check",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now().isoformat",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles send booking confirmation operations",
+            "component": "send_booking_confirmation",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Validates out after check in according to business rules",
+            "component": "check_out_after_check_in",
+            "business_rules": [
+              "Business rule: 'check_in_date' in values and v <= values['check_in_date']"
+            ],
+            "data_transformations": [],
+            "dependencies": []
+          },
+          {
+            "step": "Validates password according to business rules",
+            "component": "validate_password",
+            "business_rules": [
+              "Business rule: len(v) < 8",
+              "Business rule: not any((c.isupper() for c in v))",
+              "Business rule: not any((c.islower() for c in v))",
+              "Business rule: not any((c.isdigit() for c in v))"
+            ],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "c",
+                "operation": "c.isupper",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "c",
+                "operation": "c.islower",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "c",
+                "operation": "c.isdigit",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Validates out after check in according to business rules",
+            "component": "check_out_after_check_in",
+            "business_rules": [
+              "Business rule: 'check_in_date' in values and v <= values['check_in_date']"
+            ],
+            "data_transformations": [],
+            "dependencies": []
+          },
+          {
+            "step": "Validates booking dates according to business rules",
+            "component": "validate_booking_dates",
+            "business_rules": [
+              "Business rule: check_in and check_out",
+              "Business rule: check_in > max_future_date",
+              "Business rule: check_in < date.today()"
+            ],
+            "data_transformations": [
+              "values.get('check_in_date') \u2192 check_in",
+              "values.get('check_out_date') \u2192 check_out",
+              "date.today() + timedelta(days=365) \u2192 max_future_date"
+            ],
+            "dependencies": [
+              {
+                "dependency": "values",
+                "operation": "values.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "values",
+                "operation": "values.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "date",
+                "operation": "date.today",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "date",
+                "operation": "date.today",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Validates price range according to business rules",
+            "component": "validate_price_range",
+            "business_rules": [
+              "Business rule: min_price is not None and max_price is not None and (min_price > max_price)"
+            ],
+            "data_transformations": [
+              "values.get('min_price') \u2192 min_price",
+              "values.get('max_price') \u2192 max_price"
+            ],
+            "dependencies": [
+              {
+                "dependency": "values",
+                "operation": "values.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "values",
+                "operation": "values.get",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Validates room availability according to business rules",
+            "component": "check_room_availability",
+            "business_rules": [],
+            "data_transformations": [
+              "self.db.query(Booking).filter(and_(Booking.room_id == room_id, Booking.status.in_([BookingStatus.CONFIRMED, BookingStatus.CHECKED_IN]), or_(and_(Booking.check_in_date <= check_in, Booking.check_out_date > check_in), and_(Booking.check_in_date < check_out, Booking.check_out_date >= check_out), and_(Booking.check_in_date >= check_in, Booking.check_out_date <= check_out)))).first() \u2192 conflicting_bookings"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Booking).filter(and_(Booking.room_id == room_id, Booking.status.in_([BookingStatus.CONFIRMED, BookingStatus.CHECKED_IN]), or_(and_(Booking.check_in_date <= check_in, Booking.check_out_date > check_in), and_(Booking.check_in_date < check_out, Booking.check_out_date >= check_out), and_(Booking.check_in_date >= check_in, Booking.check_out_date <= check_out)))).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Booking).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "Booking",
+                "operation": "Booking.status.in_",
+                "dependency_type": "external_service"
+              }
+            ]
+          }
+        ],
+        "outcomes": [
+          "Logging/tracking: logger.info"
+        ],
+        "data_transformations": [
+          "values.get('check_in_date') \u2192 check_in",
+          "values.get('check_out_date') \u2192 check_out",
+          "date.today() + timedelta(days=365) \u2192 max_future_date",
+          "values.get('min_price') \u2192 min_price",
+          "values.get('max_price') \u2192 max_price",
+          "self.db.query(Booking).filter(and_(Booking.room_id == room_id, Booking.status.in_([BookingStatus.CONFIRMED, BookingStatus.CHECKED_IN]), or_(and_(Booking.check_in_date <= check_in, Booking.check_out_date > check_in), and_(Booking.check_in_date < check_out, Booking.check_out_date >= check_out), and_(Booking.check_in_date >= check_in, Booking.check_out_date <= check_out)))).first() \u2192 conflicting_bookings"
+        ],
+        "error_scenarios": [],
+        "performance_characteristics": {
+          "async_operations": 2,
+          "database_calls": 0,
+          "external_calls": 0,
+          "complexity_score": 10
+        },
+        "dependencies": [
+          "values",
+          "app",
+          "logger",
+          "datetime",
+          "date",
+          "Booking",
+          "c",
+          "self"
+        ]
+      },
+      {
+        "process": "search",
+        "trigger": "Manual trigger",
+        "steps": [
+          {
+            "step": "Handles search hotels operations",
+            "component": "search_hotels",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.post",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles search hotels operations",
+            "component": "search_hotels",
+            "business_rules": [
+              "Business rule: filters.get('city')",
+              "Business rule: filters.get('star_rating')",
+              "Business rule: filters.get('min_price') and filters.get('max_price')"
+            ],
+            "data_transformations": [
+              "self.db.query(Hotel).filter(Hotel.is_active == True) \u2192 query",
+              "query.filter(Hotel.city.ilike(f\"%{filters['city']}%\")) \u2192 query",
+              "query.filter(Hotel.star_rating >= filters['star_rating']) \u2192 query",
+              "query.join(Room).filter(and_(Room.price_per_night >= filters['min_price'], Room.price_per_night <= filters['max_price'])) \u2192 query"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Hotel).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "filters",
+                "operation": "filters.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "filters",
+                "operation": "filters.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.distinct().all",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "filters",
+                "operation": "filters.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "filters",
+                "operation": "filters.get",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.join(Room).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "Hotel",
+                "operation": "Hotel.city.ilike",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.distinct",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "query",
+                "operation": "query.join",
+                "dependency_type": "external_service"
+              }
+            ]
+          }
+        ],
+        "outcomes": [
+          "Logging/tracking: logger.info"
+        ],
+        "data_transformations": [
+          "self.db.query(Hotel).filter(Hotel.is_active == True) \u2192 query",
+          "query.filter(Hotel.city.ilike(f\"%{filters['city']}%\")) \u2192 query",
+          "query.filter(Hotel.star_rating >= filters['star_rating']) \u2192 query",
+          "query.join(Room).filter(and_(Room.price_per_night >= filters['min_price'], Room.price_per_night <= filters['max_price'])) \u2192 query"
+        ],
+        "error_scenarios": [],
+        "performance_characteristics": {
+          "async_operations": 1,
+          "database_calls": 0,
+          "external_calls": 0,
+          "complexity_score": 3
+        },
+        "dependencies": [
+          "query",
+          "app",
+          "logger",
+          "filters",
+          "Hotel",
+          "self"
+        ]
+      },
+      {
+        "process": "notification",
+        "trigger": "Manual trigger",
+        "steps": [
+          {
+            "step": "Handles send welcome email operations",
+            "component": "send_welcome_email",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles send notification operations",
+            "component": "send_notification",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "logger",
+                "operation": "logger.info",
+                "dependency_type": "external_service"
+              }
+            ]
+          }
+        ],
+        "outcomes": [
+          "Logging/tracking: logger.info"
+        ],
+        "data_transformations": [],
+        "error_scenarios": [],
+        "performance_characteristics": {
+          "async_operations": 1,
+          "database_calls": 0,
+          "external_calls": 0,
+          "complexity_score": 0
+        },
+        "dependencies": [
+          "logger"
+        ]
+      },
+      {
+        "process": "processing",
+        "trigger": "Event handler: http_exception_handler",
+        "steps": [
+          {
+            "step": "Handles http exception operations",
+            "component": "http_exception_handler",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.exception_handler",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now().isoformat",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Handles general exception operations",
+            "component": "general_exception_handler",
+            "business_rules": [],
+            "data_transformations": [],
+            "dependencies": [
+              {
+                "dependency": "app",
+                "operation": "app.exception_handler",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "logger",
+                "operation": "logger.error",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now().isoformat",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.now",
+                "dependency_type": "external_service"
+              }
+            ]
+          },
+          {
+            "step": "Implements business logic for process payment",
+            "component": "process_payment",
+            "business_rules": [
+              "Business rule: not payment",
+              "Business rule: success",
+              "Business operation: booking_service.update_booking_status"
+            ],
+            "data_transformations": [
+              "self.db.query(Payment).filter(Payment.id == payment_id).first() \u2192 payment",
+              "PaymentStatus.COMPLETED if success else PaymentStatus.FAILED \u2192 payment.status",
+              "datetime.utcnow() \u2192 payment.updated_at",
+              "BookingService(self.db) \u2192 booking_service"
+            ],
+            "dependencies": [
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Payment).filter(Payment.id == payment_id).first",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "datetime",
+                "operation": "datetime.utcnow",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.commit",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "booking_service",
+                "operation": "booking_service.update_booking_status",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query(Payment).filter",
+                "dependency_type": "external_service"
+              },
+              {
+                "dependency": "self",
+                "operation": "self.db.query",
+                "dependency_type": "external_service"
+              }
+            ]
+          }
+        ],
+        "outcomes": [
+          "Logging/tracking: logger.error",
+          "Data modification: booking_service.update_booking_status"
+        ],
+        "data_transformations": [
+          "self.db.query(Payment).filter(Payment.id == payment_id).first() \u2192 payment",
+          "PaymentStatus.COMPLETED if success else PaymentStatus.FAILED \u2192 payment.status",
+          "datetime.utcnow() \u2192 payment.updated_at",
+          "BookingService(self.db) \u2192 booking_service"
+        ],
+        "error_scenarios": [],
+        "performance_characteristics": {
+          "async_operations": 2,
+          "database_calls": 0,
+          "external_calls": 0,
+          "complexity_score": 2
+        },
+        "dependencies": [
+          "app",
+          "logger",
+          "datetime",
+          "booking_service",
+          "self"
+        ]
+      }
+    ],
+    "data_flow_graph": {
+      "nodes": [],
+      "edges": []
+    },
+    "business_workflows": [],
+    "error_handling_strategy": {
+      "validation_errors": {
+        "handling": [],
+        "recovery": [],
+        "logging": []
+      },
+      "business_errors": {
+        "handling": [],
+        "recovery": [],
+        "logging": []
+      },
+      "system_errors": {
+        "handling": [
+          "Exception",
+          "Exception"
+        ],
+        "recovery": [],
+        "logging": []
+      },
+      "error_propagation_patterns": [],
+      "error_response_formats": [
+        {
+          "error_type": "ErrorResponse",
+          "structure": {
+            "base_classes": [],
+            "attributes": [],
+            "methods": []
+          }
+        }
+      ],
+      "error_monitoring": []
+    }
+  },
+  "architectural_intent": {
+    "design_decisions_identified": [],
+    "architecture_consistency": {
+      "consistent_patterns": [
+        "Error handling follows unified strategy"
+      ],
+      "inconsistencies": []
+    },
+    "quality_attributes_addressed": []
+  },
+  "gap_analysis_readiness": {
+    "mapping_to_design_concepts": [
+      {
+        "code_component": "UserRole",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomType",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingStatus",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentStatus",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentMethod",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserUpdate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelUpdate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomUpdate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingUpdate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "SearchFilters",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "SearchResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserRole",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomType",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingStatus",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentStatus",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentMethod",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "User",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Hotel",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Room",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Booking",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Payment",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Review",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Notification",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "AuditLog",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserRole",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomType",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingStatus",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentStatus",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentMethod",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserUpdate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelUpdate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomUpdate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingUpdate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "ReviewBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "ReviewCreate",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "ReviewResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "SearchFilters",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "SearchResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaginationParams",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "ErrorResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "SuccessResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HealthCheckResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "StatisticsResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "NotificationBase",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "NotificationResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "AuditLogResponse",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "Config",
+        "likely_design_concept": "Utility/Helper Component",
+        "responsibilities": [
+          "Support functions",
+          "Common operations"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "UserService",
+        "likely_design_concept": "Domain Service/Application Service",
+        "responsibilities": [
+          "Business logic",
+          "Workflow coordination",
+          "Transaction management"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "HotelService",
+        "likely_design_concept": "Domain Service/Application Service",
+        "responsibilities": [
+          "Business logic",
+          "Workflow coordination",
+          "Transaction management"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "RoomService",
+        "likely_design_concept": "Domain Service/Application Service",
+        "responsibilities": [
+          "Business logic",
+          "Workflow coordination",
+          "Transaction management"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "BookingService",
+        "likely_design_concept": "Domain Service/Application Service",
+        "responsibilities": [
+          "Business logic",
+          "Workflow coordination",
+          "Transaction management"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "PaymentService",
+        "likely_design_concept": "Domain Service/Application Service",
+        "responsibilities": [
+          "Business logic",
+          "Workflow coordination",
+          "Transaction management"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "ReviewService",
+        "likely_design_concept": "Domain Service/Application Service",
+        "responsibilities": [
+          "Business logic",
+          "Workflow coordination",
+          "Transaction management"
+        ],
+        "file_path": "unknown"
+      },
+      {
+        "code_component": "NotificationService",
+        "likely_design_concept": "Domain Service/Application Service",
+        "responsibilities": [
+          "Business logic",
+          "Workflow coordination",
+          "Transaction management"
+        ],
+        "file_path": "unknown"
+      }
+    ],
+    "questions_for_design_reconciliation": [
+      {
+        "question": "Code shows separate validation layers - is this intentional design?",
+        "context": "Found 3 validation functions across different layers",
+        "files": [
+          ""
+        ],
+        "design_implication": "Separation of concerns strategy"
+      }
+    ],
+    "component_traceability": {
+      "business_capability_to_code": {
+        "User Registration and Management": [
+          ""
+        ],
+        "Booking and Reservation Management": [
+          "",
+          "BookingStatus",
+          "BookingBase",
+          "BookingCreate",
+          "BookingUpdate",
+          "BookingResponse",
+          "Booking",
+          "BookingService"
+        ],
+        "Payment Processing": [
+          "",
+          "PaymentStatus",
+          "PaymentMethod",
+          "PaymentBase",
+          "PaymentCreate",
+          "PaymentResponse",
+          "Payment",
+          "PaymentService"
+        ],
+        "Notification System": [
+          ""
+        ],
+        "Security and Authentication": [
+          "UserRole"
+        ],
+        "Analytics and Reporting": [
+          "AuditLog",
+          "AuditLogResponse"
+        ]
+      },
+      "code_to_business_capability": {
+        "": [
+          "User Registration and Management",
+          "Booking and Reservation Management",
+          "Payment Processing",
+          "Notification System"
+        ],
+        "BookingStatus": [
+          "Booking and Reservation Management"
+        ],
+        "BookingBase": [
+          "Booking and Reservation Management"
+        ],
+        "BookingCreate": [
+          "Booking and Reservation Management"
+        ],
+        "BookingUpdate": [
+          "Booking and Reservation Management"
+        ],
+        "BookingResponse": [
+          "Booking and Reservation Management"
+        ],
+        "Booking": [
+          "Booking and Reservation Management"
+        ],
+        "BookingService": [
+          "Booking and Reservation Management"
+        ],
+        "PaymentStatus": [
+          "Payment Processing"
+        ],
+        "PaymentMethod": [
+          "Payment Processing"
+        ],
+        "PaymentBase": [
+          "Payment Processing"
+        ],
+        "PaymentCreate": [
+          "Payment Processing"
+        ],
+        "PaymentResponse": [
+          "Payment Processing"
+        ],
+        "Payment": [
+          "Payment Processing"
+        ],
+        "PaymentService": [
+          "Payment Processing"
+        ],
+        "UserRole": [
+          "Security and Authentication"
+        ],
+        "AuditLog": [
+          "Analytics and Reporting"
+        ],
+        "AuditLogResponse": [
+          "Analytics and Reporting"
+        ]
+      },
+      "component_relationships": {}
+    },
+    "design_gaps_identified": [
+      {
+        "area": "API Design",
+        "issue": "Lack of defined API endpoints",
+        "recommendation": "Define RESTful API endpoints for each business capability.",
+        "priority": "High",
+        "impact": "Improves integration and usability of the system."
+      },
+      {
+        "area": "Business Logic",
+        "issue": "Business rules are not fully implemented",
+        "recommendation": "Implement all business rules for booking and payment processing.",
+        "priority": "Medium",
+        "impact": "Ensures compliance with business requirements."
+      },
+      {
+        "area": "Documentation",
+        "issue": "Insufficient documentation for components",
+        "recommendation": "Enhance documentation for services and workflows.",
+        "priority": "Low",
+        "impact": "Facilitates better understanding and onboarding."
+      }
+    ]
+  }
+}
