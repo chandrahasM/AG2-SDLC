@@ -6,6 +6,94 @@ A comprehensive AI-powered repository analysis system that provides semantic, st
 
 The Repository Analyzer Agent is designed to extract complete understanding of codebases through advanced analysis techniques, providing insights that are ready for downstream design agents and documentation synthesis.
 
+## 🔄 Workflow 1: Code to Design - Problem Statement
+
+### **Objective**
+Reverse-engineer accurate design documentation from an existing codebase by reconciling code reality with existing documentation through AI agent collaboration.
+
+### **Agent Sequence & Responsibilities**
+
+#### **1. Repository Analyzer Agent** ✅ *IMPLEMENTED*
+- **Purpose**: Analyze codebase structure, extract architectural patterns, and understand business semantics from the actual implementation
+- **Key Capabilities**:
+  - Semantic analysis of business domain and capabilities
+  - Advanced structural analysis with AST parsing
+  - Behavioral analysis of API contracts and workflows
+  - Architectural intent detection and pattern recognition
+  - Gap analysis readiness for design reconciliation
+
+#### **2. Documentation Synthesizer Agent** 🚧 *PENDING*
+- **Purpose**: Parse existing design/requirements documents to understand the documented system architecture and intended design
+- **Key Capabilities**:
+  - Extract architectural information from existing documentation
+  - Parse requirements and design specifications
+  - Identify documented patterns and design decisions
+  - Map documented components to business capabilities
+
+#### **3. Design Architect Agent** 🚧 *PENDING*
+- **Purpose**: Compare code reality vs documented design, identify gaps/discrepancies, and generate updated design documents
+- **Key Capabilities**:
+  - Compare code analysis with documented design
+  - Identify architectural gaps and inconsistencies
+  - Generate updated design documents
+  - Propose design improvements and alignments
+
+#### **4. Test Analyst Agent** 🚧 *PENDING*
+- **Purpose**: Analyze existing tests and propose comprehensive test strategies based on the actual code implementation
+- **Key Capabilities**:
+  - Analyze existing test coverage and quality
+  - Identify missing test scenarios
+  - Propose comprehensive test strategies
+  - Generate test recommendations based on code analysis
+
+#### **5. DevOps Designer Agent** 🚧 *PENDING*
+- **Purpose**: Create deployment and operational design by analyzing logs and infrastructure patterns
+- **Key Capabilities**:
+  - Analyze deployment patterns and infrastructure
+  - Review operational logs and monitoring
+  - Design deployment and operational strategies
+  - Propose infrastructure improvements
+
+#### **6. QA Validator Agent** 🚧 *PENDING*
+- **Purpose**: Generate intelligent clarification questions and validation points for human review
+- **Key Capabilities**:
+  - Generate validation questions for human review
+  - Identify critical decision points
+  - Create quality assurance checkpoints
+  - Ensure design accuracy and completeness
+
+### **Final Output**
+Updated design documents that accurately reflect the current codebase, with identified gaps and human-validation questions.
+
+### **Workflow Architecture**
+
+```mermaid
+graph TD
+    A[Codebase] --> B[Repository Analyzer Agent]
+    B --> C[Code Analysis Results]
+    
+    D[Existing Documentation] --> E[Documentation Synthesizer Agent]
+    E --> F[Documented Design Analysis]
+    
+    C --> G[Design Architect Agent]
+    F --> G
+    G --> H[Updated Design Documents]
+    
+    C --> I[Test Analyst Agent]
+    I --> J[Test Strategy Recommendations]
+    
+    C --> K[DevOps Designer Agent]
+    K --> L[Deployment & Operational Design]
+    
+    G --> M[QA Validator Agent]
+    J --> M
+    L --> M
+    M --> N[Human Validation Questions]
+    
+    H --> O[Final Design Documentation]
+    N --> O
+```
+
 ## ✨ Key Features
 
 ### 🧠 **Semantic Analysis**
