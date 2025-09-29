@@ -1,0 +1,88 @@
+{
+  "workflow_summary": {
+    "status": "completed",
+    "duration_seconds": 53.74969840049744,
+    "agents_used": [
+      "repository_analyzer",
+      "design_analyzer",
+      "architect",
+      "code_generator"
+    ]
+  },
+  "repository_analysis_summary": {
+    "total_files": 8,
+    "components_found": 0,
+    "services_found": 0,
+    "business_capabilities": 0
+  },
+  "design_analysis_summary": {
+    "gaps_identified": 5,
+    "critical_gaps": 1,
+    "gaps": [
+      {
+        "id": "gap_1",
+        "title": "Missing 7-day forecast feature",
+        "description": "Current implementation only shows current weather, but requirements specify 7-day forecast.",
+        "impact": "high",
+        "affected_components": [
+          "WeatherCard",
+          "weatherService"
+        ],
+        "priority": "high"
+      },
+      {
+        "id": "gap_2",
+        "title": "Lack of error handling for forecast API failures",
+        "description": "Current implementation does not handle errors for the new forecast feature as specified in the requirements.",
+        "impact": "medium",
+        "affected_components": [
+          "WeatherCard",
+          "weatherService"
+        ],
+        "priority": "medium"
+      },
+      {
+        "id": "gap_3",
+        "title": "No loading state for forecast data",
+        "description": "The application does not show a loading state while fetching forecast data, which is required for better user experience.",
+        "impact": "medium",
+        "affected_components": [
+          "WeatherCard"
+        ],
+        "priority": "medium"
+      },
+      {
+        "id": "gap_4",
+        "title": "Forecast data display format",
+        "description": "The design documentation specifies that the forecast should be displayed in a card format below the current weather, which is not implemented.",
+        "impact": "medium",
+        "affected_components": [
+          "WeatherCard"
+        ],
+        "priority": "medium"
+      },
+      {
+        "id": "gap_5",
+        "title": "Refresh functionality for forecast data",
+        "description": "The ability to refresh the forecast data is not currently implemented as per the new requirements.",
+        "impact": "low",
+        "affected_components": [
+          "WeatherCard"
+        ],
+        "priority": "low"
+      }
+    ]
+  },
+  "architect_plan_summary": {
+    "files_to_modify": 3,
+    "files_to_create": 1,
+    "implementation_phases": 0,
+    "risks_identified": 2
+  },
+  "code_generation_summary": {
+    "changes_applied": 0,
+    "errors_fixed": 0,
+    "files_modified": 0,
+    "files_created": 0
+  }
+}

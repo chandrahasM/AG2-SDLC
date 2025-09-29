@@ -1,480 +1,549 @@
-# 🏗️ Repository Analyzer Agent - Ultimate Implementation
+# 🏗️ AG2 Multi-Agent Frontend Analysis System
 
-A comprehensive AI-powered repository analysis system that provides semantic, structural, and behavioral analysis of codebases using the AG2 framework with ConversableAgent and LLMConfig.
+A sophisticated multi-agent system built with **AG2 (Autogen 2.0)** for React/TypeScript codebase analysis, design gap identification, implementation planning, and automated code generation.
 
-## 🎯 Overview
+## 🎯 What It Does
 
-The Repository Analyzer Agent is designed to extract complete understanding of codebases through advanced analysis techniques, providing insights that are ready for downstream design agents and documentation synthesis.
+The streamlined workflow orchestrates **four specialized agents** using AG2's ConversableAgent framework:
 
-## 🔄 Workflow 1: Code to Design - Problem Statement
+1. **Repository Analyzer Agent** - Hybrid Python+LLM analysis of React/TypeScript codebases
+2. **Design Analyzer Agent** - Semantic gap analysis between design docs and implementation
+3. **Architect Agent** - Technical implementation planning with file-level specifications
+4. **Code Generation Agent** - Automated code changes using AG2 tool calling
 
-### **Objective**
-Reverse-engineer accurate design documentation from an existing codebase by reconciling code reality with existing documentation through AI agent collaboration.
+## 🧠 AG2 Concepts & Architecture
 
-### **Agent Sequence & Responsibilities**
+### Core AG2 Framework Components
 
-#### **1. Repository Analyzer Agent** ✅ *IMPLEMENTED*
-- **Purpose**: Analyze codebase structure, extract architectural patterns, and understand business semantics from the actual implementation
-- **Key Capabilities**:
-  - Semantic analysis of business domain and capabilities
-  - Advanced structural analysis with AST parsing
-  - Behavioral analysis of API contracts and workflows
-  - Architectural intent detection and pattern recognition
-  - Gap analysis readiness for design reconciliation
+#### **ConversableAgent** - The Foundation
+Each agent is built using AG2's `ConversableAgent` with:
+- **Autonomous LLM conversations** with specialized system messages
+- **Function calling** through `function_map` parameter
+- **Human input modes** (NEVER, ALWAYS, TERMINATE)
+- **Auto-reply limits** to prevent infinite loops
+- **Structured LLM configuration** with timeout and temperature controls
 
-#### **2. Documentation Synthesizer Agent** 🚧 *PENDING*
-- **Purpose**: Parse existing design/requirements documents to understand the documented system architecture and intended design
-- **Key Capabilities**:
-  - Extract architectural information from existing documentation
-  - Parse requirements and design specifications
-  - Identify documented patterns and design decisions
-  - Map documented components to business capabilities
+#### **LLMConfig** - Model Management
+```python
+llm_config = {
+    "config_list": [{
+        "model": "gpt-4o-mini",
+        "temperature": 0.1
+    }],
+    "timeout": 300
+}
+```
 
-#### **3. Design Architect Agent** 🚧 *PENDING*
-- **Purpose**: Compare code reality vs documented design, identify gaps/discrepancies, and generate updated design documents
-- **Key Capabilities**:
-  - Compare code analysis with documented design
-  - Identify architectural gaps and inconsistencies
-  - Generate updated design documents
-  - Propose design improvements and alignments
+#### **Function Mapping** - Tool Integration
+Agents can call Python functions as tools:
+```python
+function_map={
+    "read_file": self._read_file_tool,
+    "search_replace": self._search_replace_tool,
+    "create_file": self._create_file_tool,
+    "analyze_code": self._analyze_code_tool
+}
+```
 
-#### **4. Test Analyst Agent** 🚧 *PENDING*
-- **Purpose**: Analyze existing tests and propose comprehensive test strategies based on the actual code implementation
-- **Key Capabilities**:
-  - Analyze existing test coverage and quality
-  - Identify missing test scenarios
-  - Propose comprehensive test strategies
-  - Generate test recommendations based on code analysis
+### Agent Specialization Patterns
 
-#### **5. DevOps Designer Agent** 🚧 *PENDING*
-- **Purpose**: Create deployment and operational design by analyzing logs and infrastructure patterns
-- **Key Capabilities**:
-  - Analyze deployment patterns and infrastructure
-  - Review operational logs and monitoring
-  - Design deployment and operational strategies
-  - Propose infrastructure improvements
+#### **1. Hybrid Analysis Pattern** (Repository Analyzer)
+- **Python Tools**: Fast structural analysis (AST parsing, regex)
+- **LLM Agents**: Semantic understanding and business logic extraction
+- **Synthesis**: Combines both approaches for comprehensive analysis
 
-#### **6. QA Validator Agent** 🚧 *PENDING*
-- **Purpose**: Generate intelligent clarification questions and validation points for human review
-- **Key Capabilities**:
-  - Generate validation questions for human review
-  - Identify critical decision points
-  - Create quality assurance checkpoints
-  - Ensure design accuracy and completeness
+#### **2. Document Analysis Pattern** (Design Analyzer)
+- **Single ConversableAgent** with specialized system message
+- **Document Processing**: Reads and compares design documentation
+- **Gap Analysis**: Semantic comparison of requirements vs. implementation
 
-### **Final Output**
-Updated design documents that accurately reflect the current codebase, with identified gaps and human-validation questions.
+#### **3. Planning Pattern** (Architect Agent)
+- **Technical Decision Making**: Uses LLM for architectural decisions
+- **Structured Output**: Generates detailed technical specifications
+- **Dependency Mapping**: Defines implementation order and phases
 
-### **Workflow Architecture**
+#### **4. Tool-Calling Pattern** (Code Generator)
+- **Function Map Integration**: Direct file operation capabilities
+- **Code Manipulation**: Read, modify, and create files
+- **Pattern Recognition**: Understands existing code conventions
+
+## 🔄 System Flow Diagram
 
 ```mermaid
 graph TD
-    A[Codebase] --> B[Repository Analyzer Agent]
-    B --> C[Code Analysis Results]
+    A[📁 Repository Path] --> B[🔍 Repository Analyzer Agent]
+    C[📄 Design Document] --> D[📋 Design Analyzer Agent]
+    E[📝 Requirements] --> D
     
-    D[Existing Documentation] --> E[Documentation Synthesizer Agent]
-    E --> F[Documented Design Analysis]
+    B --> F[📊 Repository Analysis]
+    D --> G[🔍 Gap Analysis]
     
-    C --> G[Design Architect Agent]
-    F --> G
-    G --> H[Updated Design Documents]
+    F --> H[🏗️ Architect Agent]
+    G --> H
     
-    C --> I[Test Analyst Agent]
-    I --> J[Test Strategy Recommendations]
+    H --> I[📋 Implementation Plan]
+    I --> J[💻 Code Generation Agent]
     
-    C --> K[DevOps Designer Agent]
-    K --> L[Deployment & Operational Design]
+    J --> K[✅ Code Changes Applied]
     
-    G --> M[QA Validator Agent]
-    J --> M
-    L --> M
-    M --> N[Human Validation Questions]
+    subgraph "AG2 ConversableAgents"
+        B
+        D
+        H
+        J
+    end
     
-    H --> O[Final Design Documentation]
-    N --> O
+    subgraph "Python Tools"
+        L[EnhancedReactASTParser]
+        M[ComponentAnalyzer]
+        N[File Operations]
+    end
+    
+    B -.-> L
+    B -.-> M
+    J -.-> N
+    
+    style A fill:#e1f5fe
+    style C fill:#e1f5fe
+    style E fill:#e1f5fe
+    style K fill:#c8e6c9
+    style B fill:#fff3e0
+    style D fill:#fff3e0
+    style H fill:#fff3e0
+    style J fill:#fff3e0
 ```
 
-## ✨ Key Features
-
-### 🧠 **Semantic Analysis**
-- **Business Domain Extraction**: Understands what the code actually does business-wise
-- **Domain Model Understanding**: Identifies entities, aggregates, and business rules
-- **Service Boundary Detection**: Maps technical components to business capabilities
-- **Business Rule Extraction**: Extracts validation rules and business logic
-
-### 🔍 **Advanced Structural Analysis**
-- **Semantic AST Parsing**: Goes beyond syntax to understand code semantics
-- **Function Interconnection Mapping**: Maps how functions are connected and depend on each other
-- **Class Relationship Analysis**: Understands inheritance, composition, and dependencies
-- **Dependency Graph Construction**: Builds comprehensive dependency networks
-
-### ⚡ **Behavioral Analysis**
-- **API Contract Extraction**: Analyzes API endpoints, data models, and interfaces
-- **Business Process Identification**: Maps business workflows and processes
-- **Data Flow Tracing**: Traces how data flows through the system
-- **State Management Analysis**: Identifies state management patterns
-
-### 🏗️ **Architectural Intent Detection**
-- **Design Pattern Detection**: Identifies design patterns with confidence scores
-- **Architectural Pattern Recognition**: Detects layered, hexagonal, microservices patterns
-- **Design Decision Reverse Engineering**: Understands why technical decisions were made
-- **Quality Attribute Assessment**: Evaluates maintainability, testability, scalability
-
-### 📊 **Gap Analysis Readiness**
-- **Design Concept Mapping**: Maps code components to abstract design concepts
-- **Component Traceability Matrix**: Links business capabilities to code components
-- **Reconciliation Question Generation**: Generates questions for design reconciliation
-- **Design Gap Identification**: Identifies inconsistencies and improvement areas
-
-## 🏛️ Architecture
-
-### **Core Components**
+## 🏗️ Architecture Diagram
 
 ```mermaid
-graph TD
-    A[Repository Path] --> B[AST Parser Tool]
-    B --> C[Structural Data]
-    C --> D[Semantic Analyzer Tool]
-    D --> E[Business Capabilities]
-    C --> F[API Analyzer Tool]
-    F --> G[API Contracts]
-    C --> H[DataFlow Analyzer Tool]
-    H --> I[Business Workflows]
-    E --> J[Pattern Detector Tool]
-    G --> J
-    I --> J
-    J --> K[Architectural Intent]
+graph TB
+    subgraph "AG2 Multi-Agent System"
+        subgraph "Repository Analyzer Agent"
+            RA1[ConversableAgent: Component Analyzer]
+            RA2[ConversableAgent: Business Logic Analyzer]
+            RA3[ConversableAgent: Architecture Analyzer]
+            RA4[EnhancedReactASTParser Tool]
+            RA5[ComponentAnalyzer Tool]
+        end
+        
+        subgraph "Design Analyzer Agent"
+            DA1[ConversableAgent: Design Analyzer]
+            DA2[Document Reader Tool]
+        end
+        
+        subgraph "Architect Agent"
+            AA1[ConversableAgent: Architect]
+            AA2[Planning Tools]
+        end
+        
+        subgraph "Code Generation Agent"
+            CGA1[ConversableAgent: Code Generator]
+            CGA2[read_file_tool]
+            CGA3[search_replace_tool]
+            CGA4[create_file_tool]
+            CGA5[analyze_code_tool]
+        end
+    end
     
-    C --> L[AG2 ConversableAgent]
-    E --> L
-    G --> L
-    I --> L
-    K --> L
-    L --> M[Comprehensive Analysis]
+    subgraph "Data Flow"
+        DF1[Repository Analysis] --> DF2[Design Gap Analysis]
+        DF2 --> DF3[Implementation Plan]
+        DF3 --> DF4[Code Changes]
+    end
     
-    M --> N[Ultimate Output]
+    subgraph "External Systems"
+        EXT1[OpenAI GPT-4o-mini]
+        EXT2[File System]
+        EXT3[React/TypeScript Codebase]
+    end
+    
+    RA1 --> EXT1
+    RA2 --> EXT1
+    RA3 --> EXT1
+    DA1 --> EXT1
+    AA1 --> EXT1
+    CGA1 --> EXT1
+    
+    CGA2 --> EXT2
+    CGA3 --> EXT2
+    CGA4 --> EXT2
+    RA4 --> EXT3
+    
+    RA1 --> DF1
+    RA2 --> DF1
+    RA3 --> DF1
+    RA4 --> DF1
+    RA5 --> DF1
+    
+    DA1 --> DF2
+    DA2 --> DF2
+    
+    AA1 --> DF3
+    AA2 --> DF3
+    
+    CGA1 --> DF4
+    CGA2 --> DF4
+    CGA3 --> DF4
+    CGA4 --> DF4
+    CGA5 --> DF4
+    
+    style RA1 fill:#ffecb3
+    style RA2 fill:#ffecb3
+    style RA3 fill:#ffecb3
+    style DA1 fill:#e8f5e8
+    style AA1 fill:#e3f2fd
+    style CGA1 fill:#fce4ec
+    style EXT1 fill:#f3e5f5
 ```
 
-### **Tool Suite**
+## 🔧 Tool Architecture
 
-1. **SemanticCodeAnalyzer**: Business domain extraction and understanding
-2. **SemanticASTParser**: Advanced AST parsing with semantic context
-3. **AdvancedPatternDetector**: Architectural intent and design decisions
-4. **APIContractAnalyzer**: API semantics and contract extraction
-5. **DataFlowAnalyzer**: Business workflows and data flow tracing
+### **Python Tools (Fast & Precise)**
+- **EnhancedReactASTParser**: Regex-based React/TypeScript code parsing
+- **ComponentAnalyzer**: Component relationship and dependency mapping
+- **File Operations**: Read, write, search-replace operations
+
+### **LLM Tools (Semantic & Contextual)**
+- **Component Analysis**: Understanding component purpose and business role
+- **Business Logic Analysis**: Domain concept and workflow extraction
+- **Architecture Analysis**: Pattern recognition and design principles
+- **Gap Analysis**: Requirements vs. implementation comparison
+- **Implementation Planning**: Technical decision making and specifications
+
+### **Hybrid Approach Benefits**
+- **Speed**: Python tools for fast structural analysis
+- **Intelligence**: LLMs for semantic understanding and context
+- **Precision**: Combined accuracy of both approaches
+- **Scalability**: Easy to add new tools and capabilities
+
+## 🔗 Tool Connection Matrix
+
+### **Repository Analyzer Agent Tools**
+```
+EnhancedReactASTParser ──┐
+                        ├──→ Repository Analysis ──→ LLM Agents
+ComponentAnalyzer ──────┘
+                              ↓
+                    component_analyzer_agent ──→ Component Insights
+                    business_logic_agent ──────→ Business Logic
+                    architecture_agent ────────→ Architecture Patterns
+```
+
+### **Design Analyzer Agent Tools**
+```
+Document Reader ──→ Design Doc ──┐
+                                ├──→ LLM Analysis ──→ Gap Analysis
+Requirements ──→ Requirements ──┘
+```
+
+### **Architect Agent Tools**
+```
+Repository Analysis ──┐
+                     ├──→ LLM Planning ──→ Implementation Plan
+Design Analysis ─────┘
+```
+
+### **Code Generation Agent Tools**
+```
+Implementation Plan ──→ LLM Analysis ──┐
+                                      ├──→ File Operations
+read_file_tool ──────────────────────┘
+search_replace_tool ──────────────────┘
+create_file_tool ─────────────────────┘
+analyze_code_tool ────────────────────┘
+```
 
 ## 🚀 Quick Start
 
-### **Installation**
-
+### Single Command Execution
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd AG2-SDLC
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Set up environment variables
-cp .env.example .env
-# Add your OpenAI API key to .env
+python test_streamlined_workflow.py
 ```
 
-### **Basic Usage**
+### What Happens
+1. **Phase 1**: Repository Analysis - Scans and analyzes all source files
+2. **Phase 2**: Design Analysis - Compares design docs with implementation
+3. **Phase 3**: Architect Planning - Creates detailed implementation plan
+4. **Phase 4**: Code Generation - Applies changes and fixes errors
 
-```python
-from agents.repository_analyzer.ultimate_analyzer import UltimateRepositoryAnalyzer
+## 📁 Output Files
 
-# Initialize the analyzer
-analyzer = UltimateRepositoryAnalyzer(
-    model_name="gpt-4o-mini",
-    temperature=0.1
-)
+All outputs are saved to `data/outputs/streamlined_workflow/`:
 
-# Run ultimate analysis
-result = analyzer.ultimate_repository_analysis(
-    repo_path="path/to/your/repository",
-    file_patterns=["*.py", "*.js", "*.ts"],
-    analysis_config={
-        "depth_level": "ultimate",
-        "focus_areas": ["semantic", "structural", "behavioral", "architectural"]
-    }
-)
-
-# Access results
-print(f"Business Capabilities: {len(result['semantic_analysis']['business_capabilities'])}")
-print(f"API Contracts: {len(result['behavioral_analysis']['api_contracts'])}")
-print(f"Design Patterns: {len(result['architectural_intent']['design_patterns_detected'])}")
-```
-
-## 📊 Output Structure
-
-The analyzer provides comprehensive structured output:
-
-```json
-{
-  "structural_analysis": {
-    "repo_metadata": {
-      "name": "repository_name",
-      "total_files": 5,
-      "total_functions": 74,
-      "total_classes": 96,
-      "languages": ["Python"],
-      "analysis_timestamp": "2024-01-01T00:00:00"
-    },
-    "architecture_analysis": {
-      "pattern": "Layered Architecture",
-      "confidence": 0.75,
-      "components": ["UserService", "BookingService"],
-      "entry_points": ["User Registration", "Booking Management"],
-      "design_principles": ["Single Responsibility Principle"]
-    },
-    "code_quality_metrics": {
-      "average_complexity": 0.43,
-      "max_complexity": 4,
-      "documentation_coverage": 0.0,
-      "maintainability_index": 47.84,
-      "technical_debt_score": 52.16
-    },
-    "detected_patterns": [...]
-  },
-  "semantic_analysis": {
-    "business_capabilities": [...],
-    "domain_models": {...},
-    "service_boundaries": [...]
-  },
-  "behavioral_analysis": {
-    "api_contracts": [...],
-    "business_processes": [...],
-    "data_flow_graph": {...},
-    "business_workflows": [...],
-    "error_handling_strategy": {...}
-  },
-  "architectural_intent": {
-    "design_decisions_identified": [...],
-    "architecture_consistency": {...},
-    "quality_attributes_addressed": [...]
-  },
-  "gap_analysis_readiness": {
-    "mapping_to_design_concepts": [...],
-    "questions_for_design_reconciliation": [...],
-    "component_traceability": {...}
-  }
-}
-```
+- `repository_analyzer_output.json` - Complete repository analysis (1,300+ lines)
+- `design_analyzer_output.json` - Design gaps and recommendations
+- `architect_output.json` - Implementation plan and technical specs
+- `code_generator_output.json` - Code changes and fixes applied
+- `complete_workflow_output.json` - Full workflow results
+- `compact_workflow_output.json` - Compact summary for LLM consumption
 
 ## 🔧 Configuration
 
-### **Analysis Configuration**
+The workflow uses these default settings:
+- **Model**: GPT-4o-mini
+- **Temperature**: 0.1
+- **Timeout**: 300 seconds per agent
+- **Repository**: `data/inputs/sample_repositories/react_weather_app`
+- **Design Doc**: `data/inputs/sample_repositories/react_weather_app/design-document.md`
 
-```python
-analysis_config = {
-    "depth_level": "ultimate",  # Analysis depth
-    "focus_areas": [            # Areas to focus on
-        "semantic",             # Business domain understanding
-        "structural",           # Code structure analysis
-        "behavioral",           # API and workflow analysis
-        "architectural"         # Design pattern detection
-    ],
-    "include_business_analysis": True,
-    "include_pattern_detection": True,
-    "include_api_analysis": True,
-    "include_dataflow_analysis": True,
-    "generate_design_recommendations": True
-}
-```
+## 📊 Current Status
 
-### **Model Configuration**
+- ✅ **Repository Analyzer**: 100% Working - Produces comprehensive analysis
+- ✅ **Design Analyzer**: 100% Working - Identifies gaps and recommendations
+- ✅ **Architect Agent**: 100% Working - Creates detailed implementation plans
+- ⚠️ **Code Generator**: 70% Working - Has tool calling issues but runs
 
-```python
-analyzer = UltimateRepositoryAnalyzer(
-    model_name="gpt-4o-mini",  # OpenAI model
-    temperature=0.1            # Response creativity (0.0-1.0)
-)
-```
+## 🤖 Detailed Agent Breakdown
 
-## 🧪 Testing
+### **1. Repository Analyzer Agent** (`RealHybridRepositoryAnalyzerAgent`)
 
-### **Run Tests**
+**AG2 Implementation:**
+- **3 ConversableAgents**: Specialized for different analysis types
+- **Hybrid Architecture**: Python tools + LLM analysis
+- **Sequential Processing**: Structure → Semantics → Synthesis
 
-```bash
-# Test the ultimate analyzer
-python scripts/test_ultimate_analyzer.py
+**Tools Used:**
+- **EnhancedReactASTParser**: Regex-based code parsing
+- **ComponentAnalyzer**: Relationship mapping
+- **3 LLM Agents**:
+  - `component_analyzer_agent`: Component purpose and business role
+  - `business_logic_agent`: Domain concepts and workflows
+  - `architecture_agent`: Architectural patterns and principles
 
-# Test with specific repository
-python scripts/test_booking_analyzer.py
-```
+**Input:** Repository path
+**Output:** Comprehensive codebase analysis with semantic insights
 
-### **Test Results**
-
-The test suite validates:
-- ✅ Semantic analysis capabilities
-- ✅ Structural analysis with AST parsing
-- ✅ Behavioral analysis with API contracts
-- ✅ Architectural intent detection
-- ✅ AG2 framework integration
-- ✅ Gap analysis readiness
-
-## 📈 Performance
-
-### **Analysis Speed**
-- **Small repositories** (< 10 files): ~5-10 seconds
-- **Medium repositories** (10-50 files): ~15-30 seconds
-- **Large repositories** (50+ files): ~30-60 seconds
-
-### **Memory Usage**
-- **Efficient AST parsing** with minimal memory footprint
-- **Strategic code selection** to avoid token limits
-- **Streaming analysis** for large codebases
-
-## 🎯 Use Cases
-
-### **1. Documentation Synthesis**
-- Compare existing design with current codebase
-- Identify semantic gaps and inconsistencies
-- Generate precise reconciliation questions
-
-### **2. Design Architecture**
-- Update architectural documentation
-- Propose design improvements
-- Ensure design-code alignment
-
-### **3. Gap Analysis**
-- Detailed component-to-design mapping
-- Business capability traceability
-- Architecture consistency assessment
-
-### **4. Code Quality Assessment**
-- Maintainability analysis
-- Technical debt identification
-- Design pattern compliance
-
-## 🔍 Advanced Features
-
-### **Strategic Code Selection**
-The analyzer intelligently selects only essential code for LLM analysis:
-
-```python
-def _select_representative_code_samples(self, structural_data):
-    """Select only high-complexity functions and key classes"""
-    high_complexity_functions = sorted(
-        [f for f in functions if f.get("semantic_complexity", {}).get("business_rules", 0) > 3],
-        key=lambda x: x.get("semantic_complexity", {}).get("business_rules", 0),
-        reverse=True
-    )[:5]  # Only top 5 most complex functions
-```
-
-### **Business Domain Understanding**
-Extracts business meaning from technical implementation:
-
-```python
-# Identifies business capabilities like:
-- "User Registration and Management"
-- "Booking and Reservation Management" 
-- "Payment Processing"
-- "Notification System"
-- "Security and Authentication"
-```
-
-### **Architectural Pattern Detection**
-Detects and analyzes architectural patterns:
-
-```python
-# Recognizes patterns like:
-- Layered Architecture
-- Service Layer Pattern
-- Repository Pattern
-- Factory Pattern
-- Observer Pattern
-```
-
-## 🛠️ Development
-
-### **Project Structure**
-
-```
-agents/repository_analyzer/
-├── ultimate_analyzer.py          # Main analyzer class
-├── semantic_analyzer.py          # Business domain analysis
-├── advanced_ast_parser.py        # Semantic AST parsing
-├── pattern_detector.py           # Architectural pattern detection
-├── api_analyzer.py               # API contract analysis
-├── dataflow_analyzer.py          # Data flow and workflow analysis
-└── __init__.py                   # Module exports
-```
-
-### **Adding New Analysis Tools**
-
-1. Create a new analyzer class
-2. Implement the analysis logic
-3. Add it to the ultimate analyzer pipeline
-4. Update the output structure
-
-### **Customizing Analysis**
-
-```python
-class CustomRepositoryAnalyzer(UltimateRepositoryAnalyzer):
-    def _custom_analysis_phase(self, data):
-        """Add custom analysis logic"""
-        # Your custom analysis here
-        return custom_results
-```
-
-## 📚 API Reference
-
-### **UltimateRepositoryAnalyzer**
-
-#### **Constructor**
-```python
-UltimateRepositoryAnalyzer(model_name: str = "gpt-4o-mini", temperature: float = 0.1)
-```
-
-#### **Methods**
-
-##### **ultimate_repository_analysis**
-```python
-def ultimate_repository_analysis(
-    self, 
-    repo_path: str, 
-    file_patterns: List[str] = None, 
-    analysis_config: Dict[str, Any] = None
-) -> Dict[str, Any]
-```
-
-**Parameters:**
-- `repo_path`: Path to repository to analyze
-- `file_patterns`: File patterns to include (default: `["*.py", "*.js", "*.ts"]`)
-- `analysis_config`: Analysis configuration options
-
-**Returns:**
-- Comprehensive analysis results dictionary
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- **AG2 Framework** for ConversableAgent and LLMConfig
-- **OpenAI** for language model capabilities
-- **Python AST** for code parsing
-- **Community** for feedback and contributions
-
-## 📞 Support
-
-For questions, issues, or contributions:
-- Create an issue on GitHub
-- Contact the development team
-- Check the documentation
+**AG2 Pattern:** **Tool-Enhanced Analysis** - Combines fast Python tools with intelligent LLM analysis
 
 ---
 
-**Built with ❤️ using the AG2 Framework for intelligent repository analysis**
+### **2. Design Analyzer Agent** (`DesignAnalyzerAgent`)
+
+**AG2 Implementation:**
+- **Single ConversableAgent** with specialized system message
+- **Document Processing**: Reads design docs and requirements
+- **Gap Analysis**: Compares current vs. desired state
+
+**Tools Used:**
+- **File Reading**: Reads design documentation
+- **LLM Analysis**: Semantic comparison of requirements vs. implementation
+- **Structured Output**: JSON parsing of LLM responses
+
+**Input:** Design doc path, requirements, current implementation
+**Output:** Gap analysis with prioritized changes
+
+**AG2 Pattern:** **Document Analysis Agent** - Specialized for reading and comparing documentation
+
+---
+
+### **3. Architect Agent** (`ArchitectAgent`)
+
+**AG2 Implementation:**
+- **Planning Agent**: Creates implementation plans
+- **Technical Decision Making**: Uses LLM for architectural decisions
+- **Structured Output**: Generates detailed technical specifications
+
+**Tools Used:**
+- **LLM Planning**: Creates implementation phases
+- **File Specification**: Lists files to modify/create
+- **Dependency Mapping**: Defines implementation order
+- **Risk Assessment**: Identifies technical risks
+
+**Input:** Design analysis + Repository analysis
+**Output:** Detailed implementation plan with file-level changes
+
+**AG2 Pattern:** **Planning Agent** - Specialized for creating actionable technical plans
+
+---
+
+### **4. Code Generation Agent** (`SmartCodeGenerationAgent`)
+
+**AG2 Implementation:**
+- **Tool-Calling Agent**: Uses function_map for file operations
+- **Manual Tool Handling**: Implements tools as Python methods
+- **Code Manipulation**: Direct file reading/writing capabilities
+
+**Tools Used:**
+- **`read_file_tool`**: Read existing files
+- **`search_replace_tool`**: Modify files precisely
+- **`create_file_tool`**: Create new files
+- **`analyze_code_tool`**: Understand code patterns
+
+**Input:** Architect's implementation plan
+**Output:** Applied code changes
+
+**AG2 Pattern:** **Tool-Calling Agent** - Uses function_map to enable file operations
+
+## 🔗 Agent Interconnections
+
+### **Sequential Workflow Pattern**
+```
+Repository Analyzer → Design Analyzer → Architect Agent → Code Generator
+        ↓                    ↓              ↓              ↓
+   Code Analysis      Gap Analysis    Implementation    Code Changes
+```
+
+### **Data Flow Between Agents**
+
+1. **Repository Analyzer → Design Analyzer**
+   - **Data:** `current_implementation` (codebase analysis)
+   - **Purpose:** Compare current state with requirements
+
+2. **Design Analyzer → Architect Agent**
+   - **Data:** `design_analysis` (gaps identified)
+   - **Purpose:** Provide requirements for implementation planning
+
+3. **Repository Analyzer → Architect Agent**
+   - **Data:** `repo_analysis` (codebase structure)
+   - **Purpose:** Understand current architecture for planning
+
+4. **Architect Agent → Code Generator**
+   - **Data:** `architect_analysis` (implementation plan)
+   - **Purpose:** Provide specific file-level changes to implement
+
+### **Shared Context Management**
+- **Workflow Orchestrator** (`StreamlinedWorkflow`) manages data flow
+- **JSON Output Files** preserve each agent's output
+- **Structured Data** ensures compatibility between agents
+
+## 🏗️ Architecture
+
+### Core Agents
+- `agents/frontend_analyzer/streamlined_workflow.py` - Main workflow orchestrator
+- `agents/frontend_analyzer/real_hybrid_analyzer.py` - Repository analysis (integrated)
+- `agents/frontend_analyzer/design_analyzer_agent.py` - Design gap analysis
+- `agents/frontend_analyzer/architect_agent.py` - Implementation planning
+- `agents/frontend_analyzer/smart_code_generation_agent.py` - Code generation
+
+### Tools
+- `agents/frontend_analyzer/tools/enhanced_react_ast_parser.py` - React/TypeScript parsing
+- `agents/frontend_analyzer/tools/component_analyzer.py` - Component relationship analysis
+
+## 🎯 Example Output
+
+### Repository Analyzer
+- **Files Analyzed**: 8
+- **Components Found**: Detailed component analysis with business logic
+- **Architectural Patterns**: Container-Presentational, Functional Components
+- **Code Quality**: Comprehensive assessment with recommendations
+
+### Design Analyzer
+- **Gaps Identified**: 5 gaps with priority levels
+- **Recommendations**: 5 actionable recommendations
+- **Alignment Score**: 0.6 (60% alignment)
+
+### Architect Agent
+- **Implementation Phases**: 4 phases with effort estimates
+- **Files to Modify**: 4 files with specific changes
+- **Files to Create**: 1 new file (ForecastCard.tsx)
+- **Risk Assessment**: 3 risks with mitigation strategies
+
+## 🚨 Known Issues
+
+- **Code Generator**: Tool calling mechanism has issues with AG2's ConversableAgent
+- **Solution**: Manual implementation or alternative tool calling approach needed
+
+## 🔄 AG2 Workflow Patterns
+
+### **1. Sequential Agent Chain**
+Each agent processes the output of the previous agent, creating a pipeline.
+
+### **2. Tool-Enhanced Agents**
+Agents use both Python tools and LLM capabilities for comprehensive analysis.
+
+### **3. Structured Output**
+All agents produce JSON outputs that can be consumed by downstream agents.
+
+### **4. Error Handling**
+Each agent has try-catch blocks and fallback responses for robustness.
+
+### **5. Logging & Monitoring**
+Comprehensive logging tracks agent execution and data flow.
+
+## 📈 Key AG2 Advantages
+
+### **Framework Benefits**
+1. **Modularity**: Each agent has a single responsibility
+2. **Reusability**: Agents can be used independently or in different workflows
+3. **Scalability**: Easy to add new agents or modify existing ones
+4. **Tool Integration**: Seamless combination of Python tools and LLM capabilities
+5. **Structured Communication**: JSON-based data exchange between agents
+6. **Error Resilience**: Each agent handles failures gracefully
+
+### **System Benefits**
+1. **Single Command**: Run all agents with one command
+2. **Sequential Execution**: Each agent runs after the previous one completes
+3. **Individual Outputs**: Each agent's output is saved separately
+4. **Comprehensive Analysis**: World-class repository and design analysis
+5. **Actionable Plans**: Detailed implementation specifications
+6. **Progress Tracking**: Real-time progress updates
+
+## 🔧 Technical Implementation Details
+
+### **AG2 ConversableAgent Configuration**
+```python
+# Example agent configuration
+agent = ConversableAgent(
+    name="agent_name",
+    system_message="Specialized system message",
+    llm_config=llm_config,
+    human_input_mode="NEVER",
+    max_consecutive_auto_reply=5,
+    function_map={
+        "tool_name": self._tool_function
+    }
+)
+```
+
+### **LLM Configuration**
+```python
+llm_config = {
+    "config_list": [{
+        "model": "gpt-4o-mini",
+        "temperature": 0.1,
+        "api_key": "your-api-key"
+    }],
+    "timeout": 300
+}
+```
+
+### **Tool Function Implementation**
+```python
+def _tool_function(self, **kwargs) -> str:
+    """Tool function that can be called by the agent"""
+    # Implementation here
+    return "Tool result"
+```
+
+### **Agent Communication Pattern**
+```python
+# Agent execution
+response = agent.run(message=prompt, max_turns=1)
+
+# Response processing
+content = self._extract_llm_content(response)
+parsed_response = json.loads(content)
+```
+
+## 🔍 Next Steps
+
+1. **Fix Code Generator tool calling issues** - Resolve AG2 function_map integration
+2. **Add execution environment integration** - Build, test, lint capabilities
+3. **Implement error detection and fixing** - Real-time error handling
+4. **Add support for other frontend frameworks** - Vue, Angular, Svelte
+5. **Enhance tool calling** - More sophisticated file operations
+6. **Add parallel processing** - Concurrent agent execution where possible
+
+## 🎯 Summary
+
+This AG2-based multi-agent system demonstrates how to build sophisticated, tool-enhanced agents that can:
+- **Analyze codebases** with both structural and semantic understanding
+- **Identify gaps** between design and implementation
+- **Create detailed plans** for technical changes
+- **Generate code** with precise file operations
+
+The system showcases AG2's power in creating modular, reusable, and scalable agent architectures that combine the speed of Python tools with the intelligence of LLMs for comprehensive software analysis and modification workflows.
+
+---
+
+**Built with ❤️ using AG2 (Autogen 2.0)**

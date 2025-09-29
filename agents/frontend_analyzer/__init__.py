@@ -2,14 +2,16 @@
 Frontend Multi-Agent Architecture for React/TypeScript Analysis
 """
 
-from .code_repo_analyzer import CodeRepositoryAnalyzerAgent
-from .design_analyzer import DesignAnalyzerAgent
-from .design_architect import DesignArchitectAgent
-from .code_generation import CodeGenerationAgent
+from .real_hybrid_analyzer import RealHybridRepositoryAnalyzerAgent
+from .design_analyzer_agent import DesignAnalyzerAgent
+from .architect_agent import ArchitectAgent
+from .smart_code_generation_agent import SmartCodeGenerationAgent
+from .streamlined_workflow import StreamlinedWorkflow
 
 __all__ = [
-    'CodeRepositoryAnalyzerAgent',
+    'RealHybridRepositoryAnalyzerAgent',
     'DesignAnalyzerAgent', 
-    'DesignArchitectAgent',
-    'CodeGenerationAgent'
+    'ArchitectAgent',
+    'SmartCodeGenerationAgent',
+    'StreamlinedWorkflow'
 ]

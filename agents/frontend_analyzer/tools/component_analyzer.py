@@ -364,3 +364,23 @@ class ComponentAnalyzer:
             if custom_hooks:
                 return True
         return False
+    
+    def analyze_relationships(self, structural_analysis: Dict[str, Any]) -> Dict[str, Any]:
+        """Analyze component relationships from structural analysis"""
+        try:
+            # Extract file analyses from structural analysis
+            file_analyses = list(structural_analysis.get("file_analysis", {}).values())
+            
+            # Run the main analysis
+            return self.analyze_components(file_analyses)
+            
+        except Exception as e:
+            self.logger.error(f"Error in component relationship analysis: {e}")
+            return {
+                "relationships": {},
+                "dependencies": {},
+                "business_capabilities": [],
+                "data_flow": [],
+                "user_interactions": [],
+                "architecture_patterns": []
+            }

@@ -1,0 +1,1642 @@
+{
+  "workflow_metadata": {
+    "status": "completed",
+    "total_duration_seconds": 53.74969840049744,
+    "agents_used": [
+      "repository_analyzer",
+      "design_analyzer",
+      "architect",
+      "code_generator"
+    ],
+    "timestamp": "2025-09-29 01:05:24",
+    "repo_path": "data/inputs/sample_repositories/react_weather_app",
+    "design_doc_path": "data/inputs/sample_repositories/react_weather_app/design-document.md"
+  },
+  "agent_outputs": {
+    "repository_analyzer": {
+      "repository_metadata": {
+        "repo_path": "data/inputs/sample_repositories/react_weather_app",
+        "total_files": 8,
+        "analyzed_files": 8,
+        "analysis_timestamp": "2025-09-29 01:04:48",
+        "analyzer_type": "real_hybrid_analyzer"
+      },
+      "components": {},
+      "business_logic": {},
+      "dependencies": {},
+      "component_relationships": {},
+      "semantic_analysis": {
+        "component_insights": {},
+        "business_capabilities": [],
+        "architectural_patterns": [
+          "Architecture analysis completed"
+        ],
+        "code_quality_assessment": {
+          "maintainability": "Good",
+          "scalability": "Good",
+          "testability": "Good"
+        },
+        "recommendations": [
+          "<autogen.io.run_response.RunResponse object at 0x000002A34D747380>"
+        ]
+      },
+      "file_analysis": {
+        "data\\inputs\\sample_repositories\\react_weather_app\\src\\services\\weatherService.ts": {
+          "file_path": "C:\\Users\\chand\\Downloads\\AG2 SDLC\\data\\inputs\\sample_repositories\\react_weather_app\\src\\services\\weatherService.ts",
+          "file_type": "service",
+          "components": [],
+          "services": [
+            {
+              "name": "WeatherService",
+              "type": "class",
+              "line_number": 11,
+              "methods": [
+                {
+                  "name": "getCurrentWeather",
+                  "type": "async",
+                  "line_number": 50,
+                  "parameters": [
+                    {
+                      "name": "location",
+                      "type": "string"
+                    }
+                  ],
+                  "return_type": "Promise"
+                },
+                {
+                  "name": "getForecast",
+                  "type": "async",
+                  "line_number": 97,
+                  "parameters": [
+                    {
+                      "name": "location",
+                      "type": "string"
+                    },
+                    {
+                      "name": "days",
+                      "type": "number = 7"
+                    }
+                  ],
+                  "return_type": "Promise"
+                },
+                {
+                  "name": "searchLocations",
+                  "type": "async",
+                  "line_number": 145,
+                  "parameters": [
+                    {
+                      "name": "query",
+                      "type": "string"
+                    }
+                  ],
+                  "return_type": "Promise"
+                },
+                {
+                  "name": "getWeatherDescription",
+                  "type": "sync",
+                  "line_number": 8,
+                  "parameters": [
+                    {
+                      "name": "code",
+                      "type": "number"
+                    }
+                  ],
+                  "return_type": "any"
+                },
+                {
+                  "name": "getWeatherIcon",
+                  "type": "sync",
+                  "line_number": 37,
+                  "parameters": [
+                    {
+                      "name": "code",
+                      "type": "number"
+                    }
+                  ],
+                  "return_type": "any"
+                },
+                {
+                  "name": "getCurrentWeather",
+                  "type": "sync",
+                  "line_number": 50,
+                  "parameters": [
+                    {
+                      "name": "location",
+                      "type": "string"
+                    }
+                  ],
+                  "return_type": "any"
+                },
+                {
+                  "name": "getForecast",
+                  "type": "sync",
+                  "line_number": 97,
+                  "parameters": [
+                    {
+                      "name": "location",
+                      "type": "string"
+                    },
+                    {
+                      "name": "days",
+                      "type": "number = 7"
+                    }
+                  ],
+                  "return_type": "any"
+                },
+                {
+                  "name": "searchLocations",
+                  "type": "sync",
+                  "line_number": 145,
+                  "parameters": [
+                    {
+                      "name": "query",
+                      "type": "string"
+                    }
+                  ],
+                  "return_type": "any"
+                }
+              ],
+              "properties": [
+                {
+                  "name": "geocodingBaseURL",
+                  "type": "string",
+                  "is_private": true
+                },
+                {
+                  "name": "https",
+                  "type": "//geocoding-api.open-meteo.com/v1'",
+                  "is_private": false
+                },
+                {
+                  "name": "weatherBaseURL",
+                  "type": "string",
+                  "is_private": true
+                },
+                {
+                  "name": "https",
+                  "type": "//api.open-meteo.com/v1'",
+                  "is_private": false
+                },
+                {
+                  "name": "code",
+                  "type": "number): string {\n    const weatherCodes: { [key: number]: string }",
+                  "is_private": false
+                },
+                {
+                  "name": "0",
+                  "type": "'Clear sky',\n      1: 'Mainly clear',\n      2: 'Partly cloudy',\n      3: 'Overcast',\n      45: 'Fog',\n      48: 'Depositing rime fog',\n      51: 'Light drizzle',\n      53: 'Moderate drizzle',\n      55: 'Dense drizzle',\n      61: 'Slight rain',\n      63: 'Moderate rain',\n      65: 'Heavy rain',\n      71: 'Slight snow fall',\n      73: 'Moderate snow fall',\n      75: 'Heavy snow fall',\n      77: 'Snow grains',\n      80: 'Slight rain showers',\n      81: 'Moderate rain showers',\n      82: 'Violent rain showers',\n      85: 'Slight snow showers',\n      86: 'Heavy snow showers',\n      95: 'Thunderstorm',\n      96: 'Thunderstorm with slight hail',\n      99: 'Thunderstorm with heavy hail'\n    }",
+                  "is_private": false
+                },
+                {
+                  "name": "code",
+                  "type": "number): string {\n    if (code",
+                  "is_private": false
+                },
+                {
+                  "name": "location",
+                  "type": "string): Promise<WeatherData> {\n    try {\n      // First, get coordinates for the location\n      const geocodingResponse",
+                  "is_private": false
+                },
+                {
+                  "name": "geocodingData",
+                  "type": "{ results: GeocodingResponse[] }",
+                  "is_private": false
+                },
+                {
+                  "name": "weatherApiData",
+                  "type": "OpenMeteoCurrentResponse",
+                  "is_private": false
+                },
+                {
+                  "name": "location",
+                  "type": "`${name}, ${country}`,\n        temperature: Math.round(weatherApiData.current.temperature_2m),\n        description: this.getWeatherDescription(weatherApiData.current.weather_code),\n        humidity: weatherApiData.current.relative_humidity_2m,\n        windSpeed: Math.round(weatherApiData.current.wind_speed_10m),\n        feelsLike: Math.round(weatherApiData.current.apparent_temperature),\n        icon: this.getWeatherIcon(weatherApiData.current.weather_code),\n        pressure: Math.round(weatherApiData.current.surface_pressure),\n        visibility: 10, // Default value\n        uvIndex: undefined\n      }",
+                  "is_private": false
+                },
+                {
+                  "name": "weather",
+                  "type": "', error)",
+                  "is_private": false
+                },
+                {
+                  "name": "location",
+                  "type": "string, days: number",
+                  "is_private": false
+                },
+                {
+                  "name": "geocodingData",
+                  "type": "{ results: GeocodingResponse[] }",
+                  "is_private": false
+                },
+                {
+                  "name": "forecast",
+                  "type": "ForecastData[]",
+                  "is_private": false
+                },
+                {
+                  "name": "date",
+                  "type": "forecastApiData.daily.time[i],\n          temperature: Math.round((forecastApiData.daily.temperature_2m_max[i] + forecastApiData.daily.temperature_2m_min[i]) / 2),\n          condition: this.getWeatherDescription(forecastApiData.daily.weather_code[i]),\n          humidity: forecastApiData.daily.relative_humidity_2m[i],\n          windSpeed: Math.round(forecastApiData.daily.wind_speed_10m_max[i])\n        })",
+                  "is_private": false
+                },
+                {
+                  "name": "forecast",
+                  "type": "', error)",
+                  "is_private": false
+                },
+                {
+                  "name": "query",
+                  "type": "string): Promise<string[]> {\n    try {\n      const response",
+                  "is_private": false
+                },
+                {
+                  "name": "data",
+                  "type": "{ results: GeocodingResponse[] }",
+                  "is_private": false
+                },
+                {
+                  "name": "locations",
+                  "type": "', error)",
+                  "is_private": false
+                }
+              ],
+              "is_exported": false,
+              "complexity": 19
+            },
+            {
+              "name": "weatherService",
+              "type": "instance",
+              "class_name": "WeatherService",
+              "line_number": 180,
+              "is_exported": true
+            }
+          ],
+          "interfaces": [
+            {
+              "name": "ForecastData",
+              "line_number": 3,
+              "properties": [
+                {
+                  "name": "date",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "temperature",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "condition",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "humidity",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "windSpeed",
+                  "type": "number",
+                  "optional": false
+                }
+              ],
+              "methods": [],
+              "extends": [],
+              "is_exported": true
+            }
+          ],
+          "hooks": [],
+          "imports": [
+            {
+              "name": "WeatherData",
+              "source": "../types/weather",
+              "type": "named"
+            },
+            {
+              "name": "OpenMeteoCurrentResponse",
+              "source": "../types/weather",
+              "type": "named"
+            },
+            {
+              "name": "GeocodingResponse",
+              "source": "../types/weather",
+              "type": "named"
+            }
+          ],
+          "exports": [
+            {
+              "name": "weatherService",
+              "type": "default"
+            },
+            {
+              "name": "weatherService",
+              "type": "named"
+            }
+          ],
+          "dependencies": [],
+          "complexity": 22,
+          "business_logic": []
+        },
+        "data\\inputs\\sample_repositories\\react_weather_app\\src\\types\\weather.ts": {
+          "file_path": "C:\\Users\\chand\\Downloads\\AG2 SDLC\\data\\inputs\\sample_repositories\\react_weather_app\\src\\types\\weather.ts",
+          "file_type": "utility",
+          "components": [],
+          "services": [],
+          "interfaces": [
+            {
+              "name": "WeatherData",
+              "line_number": 1,
+              "properties": [
+                {
+                  "name": "location",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "temperature",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "humidity",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "windSpeed",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "feelsLike",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "icon",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "pressure",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "visibility",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "uvIndex",
+                  "type": "number",
+                  "optional": true
+                }
+              ],
+              "methods": [],
+              "extends": [],
+              "is_exported": true
+            },
+            {
+              "name": "OpenMeteoCurrentResponse",
+              "line_number": 14,
+              "properties": [
+                {
+                  "name": "latitude",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "longitude",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "elevation",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "timezone",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "timezone_abbreviation",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "current",
+                  "type": "{\n    time: string",
+                  "optional": false
+                },
+                {
+                  "name": "temperature_2m",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "relative_humidity_2m",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "apparent_temperature",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "is_day",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "precipitation",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "rain",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "showers",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "snowfall",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "weather_code",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "cloud_cover",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "surface_pressure",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "wind_speed_10m",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "wind_direction_10m",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "wind_gusts_10m",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "current_units",
+                  "type": "{\n    temperature_2m: string",
+                  "optional": false
+                },
+                {
+                  "name": "relative_humidity_2m",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "apparent_temperature",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "precipitation",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "weather_code",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "cloud_cover",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "surface_pressure",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "wind_speed_10m",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "wind_direction_10m",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "wind_gusts_10m",
+                  "type": "string",
+                  "optional": false
+                }
+              ],
+              "methods": [],
+              "extends": [],
+              "is_exported": true
+            },
+            {
+              "name": "GeocodingResponse",
+              "line_number": 51,
+              "properties": [
+                {
+                  "name": "name",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "latitude",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "longitude",
+                  "type": "number",
+                  "optional": false
+                },
+                {
+                  "name": "country",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "admin1",
+                  "type": "string",
+                  "optional": true
+                },
+                {
+                  "name": "admin2",
+                  "type": "string",
+                  "optional": true
+                }
+              ],
+              "methods": [],
+              "extends": [],
+              "is_exported": true
+            }
+          ],
+          "hooks": [],
+          "imports": [],
+          "exports": [],
+          "dependencies": [],
+          "complexity": 1,
+          "business_logic": []
+        },
+        "data\\inputs\\sample_repositories\\react_weather_app\\src\\App.tsx": {
+          "file_path": "C:\\Users\\chand\\Downloads\\AG2 SDLC\\data\\inputs\\sample_repositories\\react_weather_app\\src\\App.tsx",
+          "file_type": "component",
+          "components": [
+            {
+              "name": "App",
+              "type": "function",
+              "line_number": 6,
+              "props": [],
+              "state": [
+                {
+                  "name": "state_variable",
+                  "type": "useState",
+                  "initial_value": "useState('London')"
+                }
+              ],
+              "hooks": [
+                {
+                  "name": "useState",
+                  "line_number": 2,
+                  "dependencies": [
+                    "currentLocation",
+                    "setCurrentLocation"
+                  ]
+                },
+                {
+                  "name": "custom_hook",
+                  "line_number": 2,
+                  "dependencies": [
+                    "currentLocation",
+                    "setCurrentLocation"
+                  ]
+                }
+              ],
+              "jsx_elements": [
+                {
+                  "name": "div",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "className",
+                      "value": "App",
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "name": "header",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "className",
+                      "value": "App-header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "name": "h1",
+                  "type": "jsx_element",
+                  "props": []
+                },
+                {
+                  "name": "SearchForm",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "placeholder",
+                      "value": "Enter city name",
+                      "type": "string"
+                    },
+                    {
+                      "name": "onSearch",
+                      "value": "handleSearch",
+                      "type": "expression"
+                    }
+                  ]
+                },
+                {
+                  "name": "main",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "className",
+                      "value": "App-main",
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "name": "WeatherCard",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "location",
+                      "value": "currentLocation",
+                      "type": "expression"
+                    }
+                  ]
+                }
+              ],
+              "event_handlers": [
+                {
+                  "name": "handleSearch",
+                  "type": "event_handler",
+                  "line_number": 2
+                }
+              ],
+              "complexity": 1
+            },
+            {
+              "name": "App",
+              "type": "function",
+              "line_number": 6,
+              "props": [],
+              "state": [
+                {
+                  "name": "state_variable",
+                  "type": "useState",
+                  "initial_value": "useState('London')"
+                }
+              ],
+              "hooks": [
+                {
+                  "name": "useState",
+                  "line_number": 2,
+                  "dependencies": [
+                    "currentLocation",
+                    "setCurrentLocation"
+                  ]
+                },
+                {
+                  "name": "custom_hook",
+                  "line_number": 2,
+                  "dependencies": [
+                    "currentLocation",
+                    "setCurrentLocation"
+                  ]
+                }
+              ],
+              "jsx_elements": [
+                {
+                  "name": "div",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "className",
+                      "value": "App",
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "name": "header",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "className",
+                      "value": "App-header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "name": "h1",
+                  "type": "jsx_element",
+                  "props": []
+                },
+                {
+                  "name": "SearchForm",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "placeholder",
+                      "value": "Enter city name",
+                      "type": "string"
+                    },
+                    {
+                      "name": "onSearch",
+                      "value": "handleSearch",
+                      "type": "expression"
+                    }
+                  ]
+                },
+                {
+                  "name": "main",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "className",
+                      "value": "App-main",
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "name": "WeatherCard",
+                  "type": "jsx_element",
+                  "props": [
+                    {
+                      "name": "location",
+                      "value": "currentLocation",
+                      "type": "expression"
+                    }
+                  ]
+                }
+              ],
+              "event_handlers": [
+                {
+                  "name": "handleSearch",
+                  "type": "event_handler",
+                  "line_number": 2
+                }
+              ],
+              "complexity": 1
+            }
+          ],
+          "services": [],
+          "interfaces": [],
+          "hooks": [
+            {
+              "name": "useState",
+              "line_number": 7,
+              "dependencies": [],
+              "return_type": "any",
+              "is_custom": false,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 1,
+              "dependencies": [
+                "currentLocation",
+                "setCurrentLocation"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 7,
+              "dependencies": [],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            }
+          ],
+          "imports": [
+            {
+              "name": "WeatherCard",
+              "source": "./components/WeatherCard",
+              "type": "default"
+            },
+            {
+              "name": "SearchForm",
+              "source": "./components/SearchForm",
+              "type": "default"
+            }
+          ],
+          "exports": [
+            {
+              "name": "App",
+              "type": "default"
+            }
+          ],
+          "dependencies": [
+            "react"
+          ],
+          "complexity": 1,
+          "business_logic": [
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 1
+            },
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 7
+            }
+          ]
+        },
+        "data\\inputs\\sample_repositories\\react_weather_app\\src\\index.tsx": {
+          "file_path": "C:\\Users\\chand\\Downloads\\AG2 SDLC\\data\\inputs\\sample_repositories\\react_weather_app\\src\\index.tsx",
+          "file_type": "component",
+          "components": [],
+          "services": [],
+          "interfaces": [],
+          "hooks": [],
+          "imports": [
+            {
+              "name": "React",
+              "source": "react",
+              "type": "default"
+            },
+            {
+              "name": "ReactDOM",
+              "source": "react-dom/client",
+              "type": "default"
+            },
+            {
+              "name": "App",
+              "source": "./App",
+              "type": "default"
+            }
+          ],
+          "exports": [],
+          "dependencies": [
+            "react",
+            "react-dom"
+          ],
+          "complexity": 1,
+          "business_logic": []
+        },
+        "data\\inputs\\sample_repositories\\react_weather_app\\src\\main.tsx": {
+          "file_path": "C:\\Users\\chand\\Downloads\\AG2 SDLC\\data\\inputs\\sample_repositories\\react_weather_app\\src\\main.tsx",
+          "file_type": "component",
+          "components": [],
+          "services": [],
+          "interfaces": [],
+          "hooks": [],
+          "imports": [
+            {
+              "name": "React",
+              "source": "react",
+              "type": "default"
+            },
+            {
+              "name": "ReactDOM",
+              "source": "react-dom/client",
+              "type": "default"
+            },
+            {
+              "name": "App",
+              "source": "./App.tsx",
+              "type": "default"
+            }
+          ],
+          "exports": [],
+          "dependencies": [
+            "react",
+            "react-dom"
+          ],
+          "complexity": 1,
+          "business_logic": []
+        },
+        "data\\inputs\\sample_repositories\\react_weather_app\\src\\components\\SearchForm.tsx": {
+          "file_path": "C:\\Users\\chand\\Downloads\\AG2 SDLC\\data\\inputs\\sample_repositories\\react_weather_app\\src\\components\\SearchForm.tsx",
+          "file_type": "component",
+          "components": [],
+          "services": [],
+          "interfaces": [
+            {
+              "name": "SearchFormProps",
+              "line_number": 4,
+              "properties": [
+                {
+                  "name": "onSearch",
+                  "type": "(query: string) => void",
+                  "optional": false
+                },
+                {
+                  "name": "placeholder",
+                  "type": "string",
+                  "optional": true
+                }
+              ],
+              "methods": [],
+              "extends": [],
+              "is_exported": false
+            }
+          ],
+          "hooks": [
+            {
+              "name": "useState",
+              "line_number": 10,
+              "dependencies": [],
+              "return_type": "any",
+              "is_custom": false,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 1,
+              "dependencies": [
+                "query",
+                "setQuery"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 10,
+              "dependencies": [],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            }
+          ],
+          "imports": [],
+          "exports": [
+            {
+              "name": "SearchForm",
+              "type": "default"
+            }
+          ],
+          "dependencies": [
+            "react"
+          ],
+          "complexity": 2,
+          "business_logic": [
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 1
+            },
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 10
+            },
+            {
+              "type": "event_handling",
+              "pattern": "onSubmit",
+              "line": 24
+            },
+            {
+              "type": "event_handling",
+              "pattern": "onChange",
+              "line": 29
+            }
+          ]
+        },
+        "data\\inputs\\sample_repositories\\react_weather_app\\src\\components\\WeatherCard.tsx": {
+          "file_path": "C:\\Users\\chand\\Downloads\\AG2 SDLC\\data\\inputs\\sample_repositories\\react_weather_app\\src\\components\\WeatherCard.tsx",
+          "file_type": "component",
+          "components": [],
+          "services": [],
+          "interfaces": [
+            {
+              "name": "WeatherCardProps",
+              "line_number": 5,
+              "properties": [
+                {
+                  "name": "location",
+                  "type": "string",
+                  "optional": false
+                }
+              ],
+              "methods": [],
+              "extends": [],
+              "is_exported": false
+            }
+          ],
+          "hooks": [
+            {
+              "name": "useState",
+              "line_number": 11,
+              "dependencies": [
+                "error",
+                "setError"
+              ],
+              "return_type": "any",
+              "is_custom": false,
+              "complexity": 1
+            },
+            {
+              "name": "useEffect",
+              "line_number": 14,
+              "dependencies": [
+                "location"
+              ],
+              "return_type": "any",
+              "is_custom": false,
+              "complexity": 2
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 1,
+              "dependencies": [
+                "weatherData",
+                "setWeatherData"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 1,
+              "dependencies": [
+                "weatherData",
+                "setWeatherData"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 10,
+              "dependencies": [
+                "loading",
+                "setLoading"
+              ],
+              "return_type": "React.FC<WeatherCardProps>",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 11,
+              "dependencies": [
+                "error",
+                "setError"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 12,
+              "dependencies": [
+                "location"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 14,
+              "dependencies": [
+                "location"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 2
+            }
+          ],
+          "imports": [
+            {
+              "name": "WeatherData",
+              "source": "../types/weather",
+              "type": "named"
+            },
+            {
+              "name": "OpenMeteoCurrentResponse",
+              "source": "../types/weather",
+              "type": "named"
+            }
+          ],
+          "exports": [
+            {
+              "name": "WeatherCard",
+              "type": "default"
+            }
+          ],
+          "dependencies": [
+            "react"
+          ],
+          "complexity": 17,
+          "business_logic": [
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 1
+            },
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 10
+            },
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 11
+            },
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 12
+            }
+          ]
+        },
+        "data\\inputs\\sample_repositories\\react_weather_app\\src\\components\\WeatherCardSimple.tsx": {
+          "file_path": "C:\\Users\\chand\\Downloads\\AG2 SDLC\\data\\inputs\\sample_repositories\\react_weather_app\\src\\components\\WeatherCardSimple.tsx",
+          "file_type": "component",
+          "components": [],
+          "services": [],
+          "interfaces": [
+            {
+              "name": "WeatherCardProps",
+              "line_number": 3,
+              "properties": [
+                {
+                  "name": "location",
+                  "type": "string",
+                  "optional": false
+                },
+                {
+                  "name": "onLocationChange",
+                  "type": "(location: string) => void",
+                  "optional": false
+                }
+              ],
+              "methods": [],
+              "extends": [],
+              "is_exported": false
+            }
+          ],
+          "hooks": [
+            {
+              "name": "useState",
+              "line_number": 10,
+              "dependencies": [
+                "error",
+                "setError"
+              ],
+              "return_type": "any",
+              "is_custom": false,
+              "complexity": 1
+            },
+            {
+              "name": "useEffect",
+              "line_number": 13,
+              "dependencies": [
+                "location"
+              ],
+              "return_type": "any",
+              "is_custom": false,
+              "complexity": 2
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 1,
+              "dependencies": [
+                "weatherData",
+                "setWeatherData"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 1,
+              "dependencies": [
+                "weatherData",
+                "setWeatherData"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 9,
+              "dependencies": [
+                "loading",
+                "setLoading"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 10,
+              "dependencies": [
+                "error",
+                "setError"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 11,
+              "dependencies": [
+                "location"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 1
+            },
+            {
+              "name": "custom_hook",
+              "line_number": 13,
+              "dependencies": [
+                "location"
+              ],
+              "return_type": "any",
+              "is_custom": true,
+              "complexity": 2
+            }
+          ],
+          "imports": [],
+          "exports": [
+            {
+              "name": "WeatherCardSimple",
+              "type": "default"
+            }
+          ],
+          "dependencies": [
+            "react"
+          ],
+          "complexity": 9,
+          "business_logic": [
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 1
+            },
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 9
+            },
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 10
+            },
+            {
+              "type": "state_management",
+              "pattern": "useState",
+              "line": 11
+            },
+            {
+              "type": "event_handling",
+              "pattern": "onChange",
+              "line": 5
+            },
+            {
+              "type": "event_handling",
+              "pattern": "onChange",
+              "line": 8
+            },
+            {
+              "type": "event_handling",
+              "pattern": "onClick",
+              "line": 89
+            }
+          ]
+        }
+      },
+      "summary": {
+        "total_components": 0,
+        "total_business_functions": 0,
+        "architectural_patterns": 1,
+        "business_capabilities": 0,
+        "analysis_quality": "comprehensive"
+      },
+      "agent_metadata": {
+        "agent_name": "repository_analyzer",
+        "phase": "repository_analysis",
+        "timestamp": "2025-09-29 01:04:48",
+        "repo_path": "data/inputs/sample_repositories/react_weather_app",
+        "analyzer_type": "real_hybrid_analyzer"
+      }
+    },
+    "design_analyzer": {
+      "gaps": [
+        {
+          "id": "gap_1",
+          "title": "Missing 7-day forecast feature",
+          "description": "Current implementation only shows current weather, but requirements specify 7-day forecast.",
+          "impact": "high",
+          "affected_components": [
+            "WeatherCard",
+            "weatherService"
+          ],
+          "priority": "high"
+        },
+        {
+          "id": "gap_2",
+          "title": "Lack of error handling for forecast API failures",
+          "description": "Current implementation does not handle errors for the new forecast feature as specified in the requirements.",
+          "impact": "medium",
+          "affected_components": [
+            "WeatherCard",
+            "weatherService"
+          ],
+          "priority": "medium"
+        },
+        {
+          "id": "gap_3",
+          "title": "No loading state for forecast data",
+          "description": "The application does not show a loading state while fetching forecast data, which is required for better user experience.",
+          "impact": "medium",
+          "affected_components": [
+            "WeatherCard"
+          ],
+          "priority": "medium"
+        },
+        {
+          "id": "gap_4",
+          "title": "Forecast data display format",
+          "description": "The design documentation specifies that the forecast should be displayed in a card format below the current weather, which is not implemented.",
+          "impact": "medium",
+          "affected_components": [
+            "WeatherCard"
+          ],
+          "priority": "medium"
+        },
+        {
+          "id": "gap_5",
+          "title": "Refresh functionality for forecast data",
+          "description": "The ability to refresh the forecast data is not currently implemented as per the new requirements.",
+          "impact": "low",
+          "affected_components": [
+            "WeatherCard"
+          ],
+          "priority": "low"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "rec_1",
+          "title": "Add forecast API endpoint",
+          "description": "Implement getForecast method in weatherService to fetch 7-day forecast data.",
+          "implementation_effort": "medium",
+          "dependencies": [
+            "weatherService",
+            "WeatherCard"
+          ]
+        },
+        {
+          "id": "rec_2",
+          "title": "Implement error handling for forecast API",
+          "description": "Add error handling logic in WeatherCard to manage forecast API failures.",
+          "implementation_effort": "medium",
+          "dependencies": [
+            "WeatherCard"
+          ]
+        },
+        {
+          "id": "rec_3",
+          "title": "Add loading state for forecast data",
+          "description": "Implement loading state in WeatherCard while fetching forecast data.",
+          "implementation_effort": "low",
+          "dependencies": [
+            "WeatherCard"
+          ]
+        },
+        {
+          "id": "rec_4",
+          "title": "Design forecast display format",
+          "description": "Update WeatherCard to display forecast data in a card format as specified in the design documentation.",
+          "implementation_effort": "medium",
+          "dependencies": [
+            "WeatherCard"
+          ]
+        },
+        {
+          "id": "rec_5",
+          "title": "Add refresh functionality for forecast data",
+          "description": "Implement a refresh button in WeatherCard to allow users to refresh the forecast data.",
+          "implementation_effort": "low",
+          "dependencies": [
+            "WeatherCard"
+          ]
+        }
+      ],
+      "overall_assessment": {
+        "alignment_score": 0.6,
+        "critical_gaps": 2,
+        "total_gaps": 5,
+        "recommendation": "Implement high-priority gaps first"
+      },
+      "agent_metadata": {
+        "agent_name": "design_analyzer",
+        "phase": "design_analysis",
+        "timestamp": "2025-09-29 01:05:02",
+        "design_doc_path": "data/inputs/sample_repositories/react_weather_app/design-document.md",
+        "analyzer_type": "real_design_analyzer"
+      }
+    },
+    "architect": {
+      "implementation_phases": [
+        {
+          "phase": "Phase 1: Service Layer Enhancement",
+          "description": "Add forecast functionality to weather service",
+          "effort": "2-3 days",
+          "priority": "high",
+          "dependencies": []
+        },
+        {
+          "phase": "Phase 2: UI Component Development",
+          "description": "Create UI components to display forecast data",
+          "effort": "2 days",
+          "priority": "high",
+          "dependencies": [
+            "Phase 1"
+          ]
+        },
+        {
+          "phase": "Phase 3: Integration and Error Handling",
+          "description": "Integrate new components and add error handling",
+          "effort": "1-2 days",
+          "priority": "medium",
+          "dependencies": [
+            "Phase 2"
+          ]
+        },
+        {
+          "phase": "Phase 4: Testing and Validation",
+          "description": "Conduct thorough testing of new features",
+          "effort": "1-2 days",
+          "priority": "medium",
+          "dependencies": [
+            "Phase 3"
+          ]
+        }
+      ],
+      "files_to_modify": [
+        {
+          "file": "src/services/weatherService.ts",
+          "changes": [
+            "Add getForecast method to fetch 7-day forecast data",
+            "Add ForecastData interface for forecast data structure",
+            "Update error handling logic for forecast API failures"
+          ],
+          "effort": "1 day",
+          "complexity": "medium"
+        },
+        {
+          "file": "src/components/WeatherCard.tsx",
+          "changes": [
+            "Integrate forecast data display",
+            "Add loading state while fetching forecast data",
+            "Implement error handling for forecast API failures"
+          ],
+          "effort": "1 day",
+          "complexity": "medium"
+        },
+        {
+          "file": "src/App.tsx",
+          "changes": [
+            "Update to include ForecastCard component",
+            "Manage state for loading and error handling"
+          ],
+          "effort": "0.5 days",
+          "complexity": "low"
+        }
+      ],
+      "files_to_create": [
+        {
+          "file": "src/components/ForecastCard.tsx",
+          "purpose": "Display 7-day weather forecast in card format",
+          "dependencies": [
+            "weatherService",
+            "ForecastData interface"
+          ],
+          "effort": "2 days",
+          "complexity": "medium"
+        }
+      ],
+      "implementation_order": [
+        "1. Update weatherService.ts with getForecast method and error handling.",
+        "2. Create ForecastCard component to display forecast data.",
+        "3. Update WeatherCard component to integrate forecast data and loading/error states.",
+        "4. Update App.tsx to include the new ForecastCard component.",
+        "5. Conduct integration testing to ensure all components work together."
+      ],
+      "testing_strategy": [
+        "Unit tests for new service methods in weatherService.",
+        "Component tests for ForecastCard to ensure correct rendering.",
+        "Integration tests for WeatherCard and ForecastCard interaction.",
+        "E2E tests to validate the complete user journey from searching for a location to viewing the forecast."
+      ],
+      "risk_assessment": [
+        {
+          "risk": "API rate limiting",
+          "probability": "medium",
+          "impact": "high",
+          "mitigation": "Implement caching and request throttling to minimize API calls."
+        },
+        {
+          "risk": "User experience issues during loading states",
+          "probability": "medium",
+          "impact": "medium",
+          "mitigation": "Ensure loading indicators are clear and provide feedback to users."
+        }
+      ],
+      "success_criteria": [
+        "7-day forecast displays correctly in the UI.",
+        "Error states are handled gracefully without crashing the application.",
+        "Performance remains acceptable with no significant delays.",
+        "All unit, integration, and E2E tests pass successfully."
+      ],
+      "agent_metadata": {
+        "agent_name": "architect",
+        "phase": "architect_planning",
+        "timestamp": "2025-09-29 01:05:24",
+        "analyzer_type": "real_architect_agent"
+      }
+    },
+    "code_generator": {
+      "status": "success",
+      "method": "smart_manual_tool_handling",
+      "agent_response": "<autogen.io.run_response.RunResponse object at 0x000002A34E0660D0>",
+      "tools_used": [
+        "read_file",
+        "search_replace",
+        "create_file",
+        "analyze_code"
+      ],
+      "agent_metadata": {
+        "agent_name": "code_generator",
+        "phase": "code_generation",
+        "timestamp": "2025-09-29 01:05:24",
+        "repo_path": "data/inputs/sample_repositories/react_weather_app",
+        "analyzer_type": "real_code_generation_agent"
+      }
+    }
+  },
+  "summary": {
+    "total_files_analyzed": 8,
+    "gaps_identified": 5,
+    "files_to_modify": 3,
+    "files_to_create": 1,
+    "code_changes_applied": 0,
+    "errors_fixed": 0
+  }
+}
