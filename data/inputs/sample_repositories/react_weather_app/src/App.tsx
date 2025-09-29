@@ -6,10 +6,6 @@ import './App.css';
 function App() {
   const [currentLocation, setCurrentLocation] = useState('London');
 
-  const handleLocationChange = (location: string) => {
-    setCurrentLocation(location);
-  };
-
   const handleSearch = (query: string) => {
     setCurrentLocation(query);
   };
@@ -21,10 +17,7 @@ function App() {
         <SearchForm onSearch={handleSearch} placeholder="Enter city name" />
       </header>
       <main className="App-main">
-        <WeatherCard 
-          location={currentLocation} 
-          onLocationChange={handleLocationChange} 
-        />
+        <WeatherCard location={currentLocation} />
       </main>
     </div>
   );

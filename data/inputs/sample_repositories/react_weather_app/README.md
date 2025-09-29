@@ -27,6 +27,20 @@ A beautiful React weather application that displays current weather conditions u
 - **CSS3** with modern styling
 - **Fetch API** for HTTP requests
 
+## Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
+
+# Open http://localhost:3000 in your browser
+```
+
+That's it! The app will work out of the box with no additional configuration needed.
+
 ## Getting Started
 
 ### Prerequisites
@@ -57,12 +71,9 @@ A beautiful React weather application that displays current weather conditions u
 
 1. **Default Location**: The app loads with London weather by default
 2. **Search for Weather**: 
-   - Type a city name in the search box
+   - Type a city name in the search box at the top
    - Click "Search" or press Enter
    - The weather card will update with the new location's data
-3. **Direct Weather Search**: 
-   - Use the search form in the weather card itself
-   - Enter a location and click "Get Weather"
 
 ## API Integration
 
@@ -76,25 +87,29 @@ This app uses the **Open-Meteo API**, which provides:
 ### API Endpoints Used
 
 - **Geocoding**: `https://geocoding-api.open-meteo.com/v1/search`
-- **Current Weather**: `https://api.open-meteo.com/v1/current`
-- **Forecast**: `https://api.open-meteo.com/v1/forecast`
+- **Current Weather**: `https://api.open-meteo.com/v1/forecast` (with current parameters)
 
 ## Project Structure
 
 ```
-src/
-├── components/
-│   ├── WeatherCard.tsx      # Main weather display component
-│   ├── WeatherCard.css      # Weather card styling
-│   ├── SearchForm.tsx       # Search input component
-│   └── SearchForm.css       # Search form styling
-├── services/
-│   └── weatherService.ts    # API service layer
-├── types/
-│   └── weather.ts           # TypeScript type definitions
-├── App.tsx                  # Main app component
-├── App.css                  # App styling
-└── main.tsx                 # App entry point
+react_weather_app/
+├── public/
+│   └── index.html           # HTML template (Create React App)
+├── src/
+│   ├── components/
+│   │   ├── WeatherCard.tsx  # Main weather display component
+│   │   ├── WeatherCard.css  # Weather card styling
+│   │   ├── SearchForm.tsx   # Search input component
+│   │   └── SearchForm.css   # Search form styling
+│   ├── services/
+│   │   └── weatherService.ts # API service layer
+│   ├── types/
+│   │   └── weather.ts       # TypeScript type definitions
+│   ├── App.tsx              # Main app component
+│   ├── App.css              # App styling
+│   └── index.tsx            # App entry point (Create React App)
+├── package.json             # Dependencies and scripts
+└── README.md               # This file
 ```
 
 ## Available Scripts

@@ -4,10 +4,9 @@ import { WeatherData, OpenMeteoCurrentResponse } from '../types/weather';
 
 interface WeatherCardProps {
   location: string;
-  onLocationChange: (location: string) => void;
 }
 
-const WeatherCard: React.FC<WeatherCardProps> = ({ location, onLocationChange }) => {
+const WeatherCard: React.FC<WeatherCardProps> = ({ location }) => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,33 +22,42 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ location, onLocationChange })
     setError(null);
     
     try {
+      console.log('Fetching weather data for:', location);
+      
       // First, get coordinates for the location using Open-Meteo Geocoding API
-      const geocodingResponse = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`
-      );
+      const geocodingUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`;
+      console.log('Geocoding URL:', geocodingUrl);
+      
+      const geocodingResponse = await fetch(geocodingUrl);
+      console.log('Geocoding response status:', geocodingResponse.status);
       
       if (!geocodingResponse.ok) {
-        throw new Error('Failed to find location');
+        throw new Error(`Failed to find location: ${geocodingResponse.status} ${geocodingResponse.statusText}`);
       }
       
       const geocodingData = await geocodingResponse.json();
+      console.log('Geocoding data:', geocodingData);
       
       if (!geocodingData.results || geocodingData.results.length === 0) {
         throw new Error('Location not found');
       }
       
       const { latitude, longitude, name, country } = geocodingData.results[0];
+      console.log('Coordinates:', { latitude, longitude, name, country });
       
       // Then, get weather data using Open-Meteo Weather API
-      const weatherResponse = await fetch(
-        `https://api.open-meteo.com/v1/current?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,cloud_cover&timezone=auto`
-      );
+      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,cloud_cover&timezone=auto`;
+      console.log('Weather URL:', weatherUrl);
+      
+      const weatherResponse = await fetch(weatherUrl);
+      console.log('Weather response status:', weatherResponse.status);
       
       if (!weatherResponse.ok) {
-        throw new Error('Failed to fetch weather data');
+        throw new Error(`Failed to fetch weather data: ${weatherResponse.status} ${weatherResponse.statusText}`);
       }
       
       const weatherApiData: OpenMeteoCurrentResponse = await weatherResponse.json();
+      console.log('Weather data:', weatherApiData);
       
       // Transform Open-Meteo data to our WeatherData format
       const transformedData: WeatherData = {
@@ -67,7 +75,9 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ location, onLocationChange })
       
       setWeatherData(transformedData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error('Error fetching weather data:', err);
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -116,14 +126,6 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ location, onLocationChange })
     return '🌤️';
   };
 
-  const handleLocationSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const newLocation = formData.get('location') as string;
-    if (newLocation) {
-      onLocationChange(newLocation);
-    }
-  };
 
   if (loading) {
     return (
@@ -143,19 +145,6 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ location, onLocationChange })
 
   return (
     <div className="weather-card">
-      <form onSubmit={handleLocationSubmit} className="location-form">
-        <input
-          type="text"
-          name="location"
-          placeholder="Enter location"
-          defaultValue={location}
-          className="location-input"
-        />
-        <button type="submit" className="location-button">
-          Get Weather
-        </button>
-      </form>
-      
       {weatherData && (
         <div className="weather-content">
           <h2 className="location">{weatherData.location}</h2>
