@@ -1,0 +1,129 @@
+.weather-card {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.weather-content {
+  text-align: center;
+}
+
+.location {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.temperature {
+  font-size: 48px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.weather-icon {
+  font-size: 48px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.condition {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.feels-like {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.detail-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+  opacity: 0.8;
+}
+
+.value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.error {
+  text-align: center;
+  font-size: 16px;
+  padding: 20px;
+  background: rgba(255, 107, 107, 0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  color: #ff6b6b;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .weather-card {
+    margin: 10px;
+    padding: 20px;
+  }
+  
+  .weather-main {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .temperature {
+    font-size: 36px;
+  }
+  
+  .weather-icon {
+    font-size: 36px;
+  }
+  
+  .details {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
